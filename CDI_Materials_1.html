@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CDI Materials — Cambridge IELTS Practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --green:#16a34a;--green-dark:#15803d;--green-light:#f0fdf4;--green-mid:#dcfce7;
+  --blue:#1e40af;--amber:#d97706;--red:#dc2626;
+  --bg:#f8fafc;--bg2:#ffffff;--bg3:#f1f5f9;
+  --border:#e2e8f0;--border2:#cbd5e1;
+  --text:#0f172a;--text2:#475569;--text3:#94a3b8;
+  --radius:8px;--shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);
+  --shadow-lg:0 10px 25px rgba(0,0,0,.1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6}
+button{cursor:pointer;font-family:'Inter',sans-serif}
+input,textarea,select{font-family:'Inter',sans-serif}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg3)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ── NAV ── */
+#nav{position:fixed;top:0;left:0;right:0;height:62px;background:#fff;border-bottom:1px solid var(--border);z-index:1000;display:flex;align-items:center;padding:0 2.5rem;gap:2rem}
+.nav-logo{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:700;letter-spacing:-.5px;color:var(--text);white-space:nowrap}
+.nav-logo .logo-dot{width:9px;height:9px;background:var(--green);border-radius:50%}
+.nav-links{display:flex;gap:2px;list-style:none;flex:1}
+.nav-links li button{padding:7px 14px;font-size:13.5px;font-weight:500;color:var(--text2);background:none;border:none;border-radius:6px;transition:all .15s}
+.nav-links li button:hover{color:var(--text);background:var(--bg3)}
+.nav-links li button.active{color:var(--green);background:var(--green-light);font-weight:600}
+.nav-right{display:flex;gap:10px;align-items:center;margin-left:auto}
+.tg-btn{display:flex;align-items:center;gap:7px;background:#0088cc;color:#fff;border:none;padding:8px 16px;border-radius:7px;font-size:13px;font-weight:600;transition:background .15s}
+.tg-btn:hover{background:#0077b3}
+.tg-icon{font-size:14px}
+
+/* ── PAGE LAYOUT ── */
+.page{display:none;min-height:calc(100vh - 62px);margin-top:62px}
+.page.active{display:block}
+
+/* ── HOME ── */
+.hero{background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 50%,#0f172a 100%);color:#fff;padding:5rem 3rem 4rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(22,163,74,.2);border:1px solid rgba(22,163,74,.4);color:#4ade80;font-size:12px;font-weight:600;padding:5px 14px;border-radius:20px;margin-bottom:1.5rem;text-transform:uppercase;letter-spacing:.8px}
+.hero h1{font-family:'Merriweather',serif;font-size:52px;font-weight:700;line-height:1.15;max-width:720px;margin:0 auto 1rem}
+.hero h1 span{color:#4ade80}
+.hero p{font-size:18px;color:#94a3b8;max-width:520px;margin:0 auto 2.5rem;font-weight:300}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-hero-p{background:var(--green);color:#fff;border:none;padding:14px 32px;border-radius:8px;font-size:15px;font-weight:700;transition:all .2s}
+.btn-hero-p:hover{background:var(--green-dark);transform:translateY(-1px)}
+.btn-hero-s{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);padding:14px 32px;border-radius:8px;font-size:15px;font-weight:500;transition:all .2s}
+.btn-hero-s:hover{background:rgba(255,255,255,.18)}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-bottom:1px solid var(--border)}
+.stat-box{padding:1.5rem 2rem;text-align:center;border-right:1px solid var(--border)}
+.stat-box:last-child{border-right:none}
+.stat-n{font-size:28px;font-weight:800;color:var(--green)}
+.stat-l{font-size:12px;color:var(--text2);text-transform:uppercase;letter-spacing:.6px;margin-top:3px}
+
+/* HOME CONTENT */
+.home-content{max-width:1200px;margin:0 auto;padding:3rem 2.5rem}
+.section-title{font-size:22px;font-weight:700;margin-bottom:.35rem}
+.section-sub{font-size:14px;color:var(--text2);margin-bottom:1.75rem}
+
+/* TEST CARDS GRID */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem;margin-bottom:2.5rem}
+.test-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem;transition:all .2s;cursor:pointer;position:relative}
+.test-card:hover{border-color:var(--green);box-shadow:0 4px 20px rgba(22,163,74,.12);transform:translateY(-2px)}
+.tc-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem}
+.tc-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.tc-icon.r{background:#f0fdf4}
+.tc-icon.l{background:#eff6ff}
+.tc-badges{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.badge{font-size:11px;font-weight:600;padding:3px 9px;border-radius:5px}
+.badge-cam{background:#fefce8;color:#854d0e}
+.badge-ac{background:#f0f9ff;color:#0369a1}
+.tc-title{font-family:'Merriweather',serif;font-size:15px;font-weight:700;margin-bottom:.4rem;line-height:1.35}
+.tc-meta{font-size:12.5px;color:var(--text2);margin-bottom:1.1rem;display:flex;gap:.75rem;flex-wrap:wrap}
+.tc-meta span{display:flex;align-items:center;gap:4px}
+.tc-foot{display:flex;justify-content:space-between;align-items:center}
+.tc-best{font-size:12px;color:var(--text3)}
+.tc-best strong{color:var(--green);font-size:13px}
+.start-btn{background:var(--green);color:#fff;border:none;padding:8px 18px;border-radius:7px;font-size:13px;font-weight:700;transition:all .15s}
+.start-btn:hover{background:var(--green-dark)}
+
+/* TG BANNER */
+.tg-banner{background:linear-gradient(90deg,#0f172a,#1e3a5f);color:#fff;border-radius:14px;padding:1.75rem 2.25rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+.tg-banner h3{font-size:18px;font-weight:700;margin-bottom:.25rem}
+.tg-banner p{font-size:14px;color:#94a3b8}
+.tg-banner-btn{background:#0088cc;color:#fff;border:none;padding:11px 22px;border-radius:8px;font-size:14px;font-weight:700;white-space:nowrap;transition:background .15s}
+.tg-banner-btn:hover{background:#0077b3}
+
+/* ── TEST LIST PAGE ── */
+.test-list-page{max-width:1200px;margin:0 auto;padding:2.5rem}
+.page-header{margin-bottom:2rem}
+.page-header h1{font-family:'Merriweather',serif;font-size:28px;font-weight:700;margin-bottom:.4rem}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem}
+.filter-btn{padding:6px 14px;border:1px solid var(--border);border-radius:20px;font-size:13px;font-weight:500;background:#fff;color:var(--text2);transition:all .15s}
+.filter-btn:hover,.filter-btn.active{border-color:var(--green);color:var(--green);background:var(--green-light)}
+
+/* ── TEST INTERFACE ── */
+#test-page{background:var(--bg3)}
+.test-topbar{background:#fff;border-bottom:1px solid var(--border);padding:.85rem 2rem;display:flex;align-items:center;gap:1.25rem;position:sticky;top:62px;z-index:100}
+.back-btn{display:flex;align-items:center;gap:6px;background:none;border:1px solid var(--border);padding:6px 13px;border-radius:7px;font-size:13px;font-weight:500;color:var(--text2);transition:all .15s}
+.back-btn:hover{background:var(--bg3);border-color:var(--border2)}
+.test-topbar-title{flex:1;font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.timer{background:#0f172a;color:#fff;padding:7px 16px;border-radius:7px;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:7px}
+.timer.warning{background:#dc2626}
+.timer-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.submit-top-btn{background:var(--green);color:#fff;border:none;padding:8px 20px;border-radius:7px;font-size:13px;font-weight:700;transition:all .15s}
+.submit-top-btn:hover{background:var(--green-dark)}
+
+/* AUDIO BAR */
+.audio-bar{background:#1e293b;color:#fff;padding:.85rem 2rem;display:flex;align-items:center;gap:1rem;border-bottom:2px solid var(--green)}
+.audio-bar-title{font-size:13px;color:#94a3b8;white-space:nowrap}
+.play-pause-btn{width:38px;height:38px;border-radius:50%;background:var(--green);color:#fff;border:none;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s}
+.play-pause-btn:hover{background:var(--green-dark)}
+.audio-slider-wrap{flex:1;position:relative}
+.audio-track{width:100%;height:5px;background:rgba(255,255,255,.2);border-radius:3px;cursor:pointer;position:relative;appearance:none;-webkit-appearance:none}
+.audio-track::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:#4ade80;cursor:pointer}
+.audio-times{display:flex;justify-content:space-between;font-size:11px;color:#64748b;margin-top:3px}
+.vol-wrap{display:flex;align-items:center;gap:7px;min-width:120px}
+.vol-icon{font-size:14px;color:#94a3b8}
+.vol-slider{width:80px;height:4px;appearance:none;-webkit-appearance:none;background:rgba(255,255,255,.2);border-radius:2px;cursor:pointer}
+.vol-slider::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:#4ade80}
+
+/* SPLIT LAYOUT */
+.split-layout{display:grid;grid-template-columns:1fr 1fr;height:calc(100vh - 62px - 52px - 55px);overflow:hidden}
+.split-layout.with-audio{height:calc(100vh - 62px - 52px - 55px - 58px)}
+
+/* PASSAGE PANEL */
+.passage-panel{overflow-y:auto;background:#fff;border-right:2px solid var(--border);padding:2rem 2.5rem;font-family:'Merriweather',serif}
+.passage-panel::-webkit-scrollbar{width:5px}
+.passage-panel h2{font-size:19px;font-weight:700;margin-bottom:.5rem;font-family:'Merriweather',serif;line-height:1.35;color:var(--text)}
+.passage-panel h3{font-size:15px;font-weight:700;margin:1.25rem 0 .5rem;color:var(--text);font-family:'Merriweather',serif}
+.passage-panel p{font-size:14.5px;line-height:1.85;color:#1e293b;margin-bottom:.9rem}
+.passage-panel .passage-meta{font-size:12px;color:var(--text3);margin-bottom:1.25rem;font-family:'Inter',sans-serif}
+.highlight-toolbar{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border);padding:.65rem 0 .75rem;margin:0 -2.5rem .75rem;padding-left:2.5rem;z-index:10;display:flex;align-items:center;gap:.65rem;flex-wrap:wrap}
+.hl-btn{padding:5px 13px;border:1px solid var(--border);border-radius:5px;font-size:12px;font-weight:600;background:#fff;transition:all .15s;font-family:'Inter',sans-serif}
+.hl-btn:hover{border-color:var(--border2)}
+.hl-btn.yellow{color:#92400e;border-color:#fcd34d}.hl-btn.yellow:hover,.hl-btn.yellow.active{background:#fef9c3;border-color:#fbbf24}
+.hl-btn.green{color:#166534;border-color:#86efac}.hl-btn.green:hover,.hl-btn.green.active{background:#dcfce7;border-color:#4ade80}
+.hl-btn.blue{color:#1e40af;border-color:#93c5fd}.hl-btn.blue:hover,.hl-btn.blue.active{background:#dbeafe;border-color:#60a5fa}
+.hl-btn.pink{color:#9d174d;border-color:#f9a8d4}.hl-btn.pink:hover,.hl-btn.pink.active{background:#fce7f3;border-color:#f472b6}
+.hl-btn.erase{color:#dc2626;border-color:#fca5a5}.hl-btn.erase:hover,.hl-btn.erase.active{background:#fee2e2;border-color:#f87171}
+.hl-label{font-size:12px;color:var(--text3);font-family:'Inter',sans-serif}
+/* applied highlights */
+.hl-y{background:#fef9c3;border-radius:2px;padding:0 1px}
+.hl-g{background:#dcfce7;border-radius:2px;padding:0 1px}
+.hl-b{background:#dbeafe;border-radius:2px;padding:0 1px}
+.hl-p{background:#fce7f3;border-radius:2px;padding:0 1px}
+/* after-submit highlights */
+.hl-answer-loc{background:#fef08a;border-bottom:2px solid #eab308;cursor:help}
+.passage-panel p::selection,.passage-panel span::selection,.passage-panel h2::selection,.passage-panel h3::selection{background:rgba(22,163,74,.25)}
+
+/* Q PANEL */
+.q-panel{overflow-y:auto;background:var(--bg3);padding:1.75rem 2rem}
+.q-panel::-webkit-scrollbar{width:5px}
+.q-section{background:#fff;border:1px solid var(--border);border-radius:10px;margin-bottom:1.25rem;overflow:hidden}
+.q-section-head{background:var(--bg3);padding:.75rem 1.25rem;border-bottom:1px solid var(--border);font-size:13px;font-weight:700;color:var(--text2);display:flex;align-items:center;gap:.5rem}
+.q-section-body{padding:1.25rem}
+.q-item{margin-bottom:1.5rem}
+.q-item:last-child{margin-bottom:0}
+.q-num{font-size:12px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.3rem}
+.q-text{font-size:14px;font-weight:500;color:var(--text);margin-bottom:.65rem;line-height:1.5}
+.q-input{width:100%;padding:9px 13px;border:1.5px solid var(--border);border-radius:7px;font-size:14px;background:#fff;color:var(--text);transition:border-color .15s}
+.q-input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(22,163,74,.1)}
+.q-input.correct{border-color:var(--green);background:#f0fdf4}
+.q-input.wrong{border-color:var(--red);background:#fef2f2}
+.q-input:disabled{background:var(--bg3)}
+.q-opts{display:flex;flex-direction:column;gap:6px}
+.q-opt{display:flex;align-items:center;gap:10px;padding:9px 13px;border:1.5px solid var(--border);border-radius:7px;background:#fff;font-size:14px;cursor:pointer;transition:all .15s}
+.q-opt:hover:not(.disabled){border-color:var(--border2);background:var(--bg3)}
+.q-opt.selected{border-color:var(--blue);background:#eff6ff}
+.q-opt.correct{border-color:var(--green);background:#f0fdf4;font-weight:600}
+.q-opt.wrong{border-color:var(--red);background:#fef2f2}
+.q-opt.disabled{cursor:default}
+.q-opt input[type=radio]{accent-color:var(--green);width:15px;height:15px;flex-shrink:0}
+.q-tf{display:flex;gap:8px}
+.tf-opt{flex:1;text-align:center;padding:8px;border:1.5px solid var(--border);border-radius:7px;background:#fff;font-size:13.5px;font-weight:500;cursor:pointer;transition:all .15s}
+.tf-opt:hover:not(.disabled){border-color:var(--border2);background:var(--bg3)}
+.tf-opt.selected{border-color:var(--blue);background:#eff6ff;color:var(--blue)}
+.tf-opt.correct{border-color:var(--green);background:#f0fdf4;color:var(--green)}
+.tf-opt.wrong{border-color:var(--red);background:#fef2f2;color:var(--red)}
+
+/* RESULTS OVERLAY */
+.results-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:2000;display:flex;align-items:center;justify-content:center;padding:1.5rem;overflow-y:auto}
+.results-box{background:#fff;border-radius:16px;max-width:780px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg)}
+.results-head{background:linear-gradient(135deg,#0f172a,#1e3a5f);color:#fff;padding:2.25rem;border-radius:16px 16px 0 0;text-align:center}
+.score-ring{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--green),#4ade80);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1.25rem;box-shadow:0 0 0 8px rgba(74,222,128,.2)}
+.score-band-big{font-size:36px;font-weight:800;color:#fff;line-height:1}
+.score-band-lbl{font-size:12px;color:rgba(255,255,255,.75);margin-top:4px;font-weight:500}
+.results-raw{font-size:18px;font-weight:700;color:#fff;margin-bottom:.25rem}
+.results-sub{font-size:14px;color:#94a3b8}
+.results-body{padding:1.75rem 2rem}
+.rb-heading{font-size:15px;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.rb-item{border-radius:8px;padding:.9rem 1.1rem;margin-bottom:.75rem;border-left:4px solid}
+.rb-item.ok{background:#f0fdf4;border-color:var(--green)}
+.rb-item.err{background:#fef2f2;border-color:var(--red)}
+.rb-item-head{display:flex;align-items:center;gap:.65rem;margin-bottom:.35rem}
+.rb-status{font-size:15px;flex-shrink:0}
+.rb-qtext{font-size:13.5px;font-weight:600;color:var(--text);line-height:1.4}
+.rb-ans-row{font-size:13px;color:var(--text2);margin-bottom:.3rem}
+.rb-correct-ans{color:var(--green);font-weight:700}
+.rb-wrong-ans{color:var(--red);font-weight:600;text-decoration:line-through}
+.rb-explain{font-size:12.5px;color:var(--text2);background:#f8fafc;border-radius:5px;padding:.5rem .75rem;margin-top:.5rem;line-height:1.55;font-style:italic;border-left:2px solid var(--border2)}
+.rb-location{font-size:12px;color:var(--blue);margin-top:.35rem;font-weight:500}
+/* transcript for listening */
+.transcript-box{background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:1.1rem;margin-top:1.25rem;font-size:13.5px;line-height:1.75;font-family:'Merriweather',serif;color:var(--text2)}
+.transcript-box h4{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--text);margin-bottom:.65rem;text-transform:uppercase;letter-spacing:.5px}
+.transcript-box .t-hl{background:#fef9c3;font-weight:600;color:#92400e;border-radius:2px;padding:0 2px}
+.results-foot{padding:1.25rem 2rem;border-top:1px solid var(--border);display:flex;gap:.75rem;justify-content:flex-end;flex-wrap:wrap}
+.retry-btn{background:var(--green);color:#fff;border:none;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:700}
+.close-results-btn{background:var(--bg3);color:var(--text);border:1px solid var(--border);padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600}
+
+/* SCORE TABLE PAGE */
+.score-page-wrap{max-width:800px;margin:0 auto;padding:2.5rem}
+.score-tbl{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow)}
+.score-tbl th{background:#0f172a;color:#fff;padding:11px 18px;font-size:13px;font-weight:600;text-align:left}
+.score-tbl td{padding:10px 18px;border-bottom:1px solid var(--border);font-size:14px}
+.score-tbl tr:last-child td{border-bottom:none}
+.score-tbl tr:hover td{background:var(--bg3)}
+.band-chip{display:inline-block;padding:3px 10px;border-radius:20px;font-weight:700;font-size:13px}
+.band-9{background:#dcfce7;color:#166534}
+.band-85{background:#d1fae5;color:#166534}
+.band-8{background:#fef9c3;color:#854d0e}
+.band-75{background:#fef3c7;color:#92400e}
+.band-7{background:#ffedd5;color:#9a3412}
+.band-6{background:#fee2e2;color:#991b1b}
+.band-other{background:#f1f5f9;color:#475569}
+
+/* HIDDEN ADMIN */
+#admin-page{background:var(--bg)}
+.admin-wrap{max-width:900px;margin:0 auto;padding:2.5rem}
+.admin-login{background:#fff;border:1px solid var(--border);border-radius:14px;padding:2.5rem;max-width:420px;margin:0 auto}
+.admin-login h2{font-size:20px;font-weight:700;margin-bottom:.35rem}
+.admin-login p{font-size:13.5px;color:var(--text2);margin-bottom:1.5rem}
+.admin-input{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;margin-bottom:.85rem;transition:border-color .15s}
+.admin-input:focus{outline:none;border-color:var(--green)}
+.admin-login-btn{width:100%;background:var(--green);color:#fff;border:none;padding:12px;border-radius:8px;font-size:15px;font-weight:700}
+.admin-panel{display:none}
+.admin-section{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.75rem;margin-bottom:1.5rem}
+.admin-section h3{font-size:16px;font-weight:700;margin-bottom:.25rem}
+.admin-section p{font-size:13px;color:var(--text2);margin-bottom:1.25rem}
+.drop-zone{border:2px dashed var(--border2);border-radius:10px;padding:2.5rem;text-align:center;cursor:pointer;transition:all .2s}
+.drop-zone:hover,.drop-zone.over{border-color:var(--green);background:var(--green-light)}
+.drop-zone-icon{font-size:40px;margin-bottom:.75rem}
+.drop-zone-title{font-size:15px;font-weight:600;margin-bottom:.35rem}
+.drop-zone-sub{font-size:13px;color:var(--text2)}
+.drop-zone-types{font-size:11px;color:var(--text3);margin-top:.35rem}
+.admin-file-list{margin-top:1rem;display:flex;flex-direction:column;gap:7px}
+.admin-file-item{background:var(--bg3);border-radius:8px;padding:9px 13px;display:flex;align-items:center;gap:9px;border:1px solid var(--border)}
+.afi-icon{font-size:18px}
+.afi-info{flex:1}
+.afi-name{font-size:13px;font-weight:600}
+.afi-size{font-size:11px;color:var(--text3)}
+.afi-del{background:none;border:none;color:var(--text3);font-size:18px;padding:0 3px;transition:color .15s}
+.afi-del:hover{color:var(--red)}
+.admin-prog-bar{height:5px;background:var(--border);border-radius:3px;margin-top:.85rem;overflow:hidden;display:none}
+.admin-prog-fill{height:100%;background:var(--green);width:0;border-radius:3px;transition:width .2s}
+.publish-btn{margin-top:1rem;background:var(--green);color:#fff;border:none;padding:11px 22px;border-radius:8px;font-size:14px;font-weight:700;display:none;transition:background .15s}
+.publish-btn:hover{background:var(--green-dark)}
+.publish-ok{display:none;color:var(--green);font-weight:600;font-size:13px;margin-top:.65rem;text-align:center}
+.meta-form{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:1rem}
+.meta-input{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:7px;font-size:13.5px}
+.meta-input:focus{outline:none;border-color:var(--green)}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="nav">
+  <div class="nav-logo"><span class="logo-dot"></span> CDI Materials</div>
+  <ul class="nav-links">
+    <li><button onclick="go('home')" id="nb-home" class="active">Home</button></li>
+    <li><button onclick="go('reading')" id="nb-reading">Reading</button></li>
+    <li><button onclick="go('listening')" id="nb-listening">Listening</button></li>
+    <li><button onclick="go('scores')" id="nb-scores">Band Scores</button></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://t.me/Khakimov_Abdulaziz" target="_blank" class="tg-btn"><span class="tg-icon">✈</span> @Khakimov_Abdulaziz</a>
+  </div>
+</nav>
+
+<!-- ══════════════ HOME ══════════════ -->
+<div class="page active" id="home-page">
+  <div class="hero">
+    <div class="hero-badge">🎓 Cambridge IELTS Official Materials</div>
+    <h1>Master Your IELTS<br><span>Reading & Listening</span></h1>
+    <p>Full Cambridge tests with real passages, instant band scoring, and detailed mistake analysis — completely free.</p>
+    <div class="hero-btns">
+      <button class="btn-hero-p" onclick="go('reading')">📖 Start Reading Test</button>
+      <button class="btn-hero-s" onclick="go('listening')">🎧 Start Listening Test</button>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-n">20+</div><div class="stat-l">Cambridge Books</div></div>
+    <div class="stat-box"><div class="stat-n">80+</div><div class="stat-l">Full Tests</div></div>
+    <div class="stat-box"><div class="stat-n">9.0</div><div class="stat-l">Band Possible</div></div>
+    <div class="stat-box"><div class="stat-n">Free</div><div class="stat-l">Always</div></div>
+  </div>
+  <div class="home-content">
+    <div class="section-title">Featured Reading Tests</div>
+    <div class="section-sub">Cambridge IELTS Academic — full passages, 40 questions, 60 minutes</div>
+    <div class="cards-grid">
+      <div class="test-card" onclick="openTest('r','cam18_r1')">
+        <div class="tc-head"><div class="tc-icon r">📖</div><div class="tc-badges"><span class="badge badge-cam">Cambridge 18</span><span class="badge badge-ac">Academic</span></div></div>
+        <div class="tc-title">Reading Test 1 — Stress, Optimism & Elm Trees</div>
+        <div class="tc-meta"><span>📄 3 passages</span><span>❓ 40 questions</span><span>⏱ 60 min</span></div>
+        <div class="tc-foot"><span class="tc-best">Band up to <strong>9.0</strong></span><button class="start-btn">Start →</button></div>
+      </div>
+      <div class="test-card" onclick="openTest('r','cam19_r1')">
+        <div class="tc-head"><div class="tc-icon r">📖</div><div class="tc-badges"><span class="badge badge-cam">Cambridge 19</span><span class="badge badge-ac">Academic</span></div></div>
+        <div class="tc-title">Reading Test 1 — Language, Memory & Sleep</div>
+        <div class="tc-meta"><span>📄 3 passages</span><span>❓ 40 questions</span><span>⏱ 60 min</span></div>
+        <div class="tc-foot"><span class="tc-best">Band up to <strong>9.0</strong></span><button class="start-btn">Start →</button></div>
+      </div>
+      <div class="test-card" onclick="openTest('r','cam17_r1')">
+        <div class="tc-head"><div class="tc-icon r">📖</div><div class="tc-badges"><span class="badge badge-cam">Cambridge 17</span><span class="badge badge-ac">Academic</span></div></div>
+        <div class="tc-title">Reading Test 1 — Monarch Butterflies & Psychology</div>
+        <div class="tc-meta"><span>📄 3 passages</span><span>❓ 40 questions</span><span>⏱ 60 min</span></div>
+        <div class="tc-foot"><span class="tc-best">Band up to <strong>9.0</strong></span><button class="start-btn">Start →</button></div>
+      </div>
+    </div>
+    <div class="section-title">Featured Listening Tests</div>
+    <div class="section-sub">Cambridge IELTS Academic — 4 sections, 40 questions, 30 minutes</div>
+    <div class="cards-grid">
+      <div class="test-card" onclick="openTest('l','cam18_l1')">
+        <div class="tc-head"><div class="tc-icon l">🎧</div><div class="tc-badges"><span class="badge badge-cam">Cambridge 18</span><span class="badge badge-ac">Academic</span></div></div>
+        <div class="tc-title">Listening Test 1 — Pottery, Handwriting & Markets</div>
+        <div class="tc-meta"><span>🎧 4 sections</span><span>❓ 40 questions</span><span>⏱ 30 min</span></div>
+        <div class="tc-foot"><span class="tc-best">Band up to <strong>9.0</strong></span><button class="start-btn">Start →</button></div>
+      </div>
+      <div class="test-card" onclick="openTest('l','cam19_l1')">
+        <div class="tc-head"><div class="tc-icon l">🎧</div><div class="tc-badges"><span class="badge badge-cam">Cambridge 19</span><span class="badge badge-ac">Academic</span></div></div>
+        <div class="tc-title">Listening Test 1 — Community Centre & Psychology</div>
+        <div class="tc-meta"><span>🎧 4 sections</span><span>❓ 40 questions</span><span>⏱ 30 min</span></div>
+        <div class="tc-foot"><span class="tc-best">Band up to <strong>9.0</strong></span><button class="start-btn">Start →</button></div>
+      </div>
+      <div class="test-card" onclick="openTest('l','cam17_l1')">
+        <div class="tc-head"><div class="tc-icon l">🎧</div><div class="tc-badges"><span class="badge badge-cam">Cambridge 17</span><span class="badge badge-ac">Academic</span></div></div>
+        <div class="tc-title">Listening Test 1 — Sports Club & Career Guidance</div>
+        <div class="tc-meta"><span>🎧 4 sections</span><span>❓ 40 questions</span><span>⏱ 30 min</span></div>
+        <div class="tc-foot"><span class="tc-best">Band up to <strong>9.0</strong></span><button class="start-btn">Start →</button></div>
+      </div>
+    </div>
+    <div class="tg-banner">
+      <div><h3>Need extra materials or have questions?</h3><p>Contact us on Telegram for personalised support and more Cambridge practice.</p></div>
+      <a href="https://t.me/Khakimov_Abdulaziz" target="_blank" class="tg-banner-btn">✈ Message @Khakimov_Abdulaziz</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ READING LIST ══════════════ -->
+<div class="page" id="reading-page">
+  <div class="test-list-page">
+    <div class="page-header">
+      <h1>📖 Reading Tests</h1>
+      <p style="font-size:14px;color:var(--text2)">Cambridge IELTS Academic · Full passages · 40 questions · 60 minutes · Instant band score</p>
+      <div class="filter-row">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">Cambridge 14</button>
+        <button class="filter-btn">Cambridge 15</button>
+        <button class="filter-btn">Cambridge 16</button>
+        <button class="filter-btn">Cambridge 17</button>
+        <button class="filter-btn">Cambridge 18</button>
+        <button class="filter-btn">Cambridge 19</button>
+      </div>
+    </div>
+    <div class="cards-grid">
+      <div class="test-card" onclick="openTest('r','cam18_r1')"><div class="tc-head"><div class="tc-icon r">📖</div><div class="tc-badges"><span class="badge badge-cam">Cambridge 18</span></div></div><div class="tc-title">Reading Test 1 — Stress, Optimism & Elm Trees</div><div class="tc-meta"><span>📄 3 passages</span><span>❓ 40 questions</span><span>⏱ 60 min</span></div><div class="tc-foot"><span class="tc-best">Band up to <strong>9.0</strong></span><button class="start-btn">Start →</button></div></div>
+      <div class="test-card" onclick="openTest('r','cam19_r1')"><div class="tc-head"><div class="tc-icon r">📖</div><div class="tc-badges"><span class="badge badge-cam">Cambridge 19</span></div></div><div class="tc-title">Reading Test 1 — Language, Memory & Sleep</div><div class="tc-meta"><span>📄 3 passages</span><span>❓ 40 questions</span><span>⏱ 60 min</span></div><div class="tc-foot"><span class="tc-best">Band up to <strong>9.0</strong></span><button class="start-btn">Start →</button></div></div>
+      <div class="test-card" onclick="openTest('r','cam17_r1')"><div class="tc-head"><div class="tc-icon r">📖</div><div class="tc-badges"><span class="badge badge-cam">Cambridge 17</span></div></div><div class="tc-title">Reading Test 1 — Monarch Butterflies & Psychology</div><div class="tc-meta"><span>📄 3 passages</span><span>❓ 40 questions</span><span>⏱ 60 min</span></div><div class="tc-foot"><span class="tc-best">Band up to <strong>9.0</strong></span><button class="start-btn">Start →</button></div></div>
+      <div class="test-card" onclick="openTest('r','cam16_r1')"><div class="tc-head"><div class="tc-icon r">📖</div><div class="tc-badges"><span class="badge badge-cam">Cambridge 16</span></div></div><div class="tc-title">Reading Test 1 — Ageing & Neuroscience</div><div class="tc-meta"><span>📄 3 passages</span><span>❓ 40 questions</span><span>⏱ 60 min</span></div><div class="tc-foot"><span class="tc-best">Band up to <strong>9.0</strong></span><button class="start-btn">Start →</button></div></div>
+      <div class="test-card" onclick="openTest('r','cam15_r1')"><div class="tc-head"><div class="tc-icon r">📖</div><div class="tc-badges"><span class="badge badge-cam">Cambridge 15</span></div></div><div class="tc-title">Reading Test 1 — Tidal Power & Productivity</div><div class="tc-meta"><span>📄 3 passages</span><span>❓ 40 questions</span><span>⏱ 60 min</span></div><div class="tc-foot"><span class="tc-best">Band up to <strong>9.0</strong></span><button class="start-btn">Start →</button></div></div>
+      <div class="test-card" onclick="openTest('r','cam14_r1')"><div class="tc-head"><div class="tc-icon r">📖</div><div class="tc-badges"><span class="badge badge-cam">Cambridge 14</span></div></div><div class="tc-title">Reading Test 1 — Driverless Cars & Leadership</div><div class="tc-meta"><span>📄 3 passages</span><span>❓ 40 questions</span><span>⏱ 60 min</span></div><div class="tc-foot"><span class="tc-best">Band up to <strong>9.0</strong></span><button class="start-btn">Start →</button></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ LISTENING LIST ══════════════ -->
+<div class="page" id="listening-page">
+  <div class="test-list-page">
+    <div class="page-header">
+      <h1>🎧 Listening Tests</h1>
+      <p style="font-size:14px;color:var(--text2)">Cambridge IELTS Academic · Real audio · 40 questions · 30 minutes · Band score with transcript after</p>
+      <div class="filter-row">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">Cambridge 14</button>
+        <button class="filter-btn">Cambridge 15</button>
+        <button class="filter-btn">Cambridge 16</button>
+        <button class="filter-btn">Cambridge 17</button>
+        <button class="filter-btn">Cambridge 18</button>
+        <button class="filter-btn">Cambridge 19</button>
+      </div>
+    </div>
+    <div class="cards-grid">
+      <div class="test-card" onclick="openTest('l','cam18_l1')"><div class="tc-head"><div class="tc-icon l">🎧</div><div class="tc-badges"><span class="badge badge-cam">Cambridge 18</span></div></div><div class="tc-title">Listening Test 1 — Pottery, Handwriting & Markets</div><div class="tc-meta"><span>🎧 4 sections</span><span>❓ 40 questions</span><span>⏱ 30 min</span></div><div class="tc-foot"><span class="tc-best">Band up to <strong>9.0</strong></span><button class="start-btn">Start →</button></div></div>
+      <div class="test-card" onclick="openTest('l','cam19_l1')"><div class="tc-head"><div class="tc-icon l">🎧</div><div class="tc-badges"><span class="badge badge-cam">Cambridge 19</span></div></div><div class="tc-title">Listening Test 1 — Community Centre & Psychology</div><div class="tc-meta"><span>🎧 4 sections</span><span>❓ 40 questions</span><span>⏱ 30 min</span></div><div class="tc-foot"><span class="tc-best">Band up to <strong>9.0</strong></span><button class="start-btn">Start →</button></div></div>
+      <div class="test-card" onclick="openTest('l','cam17_l1')"><div class="tc-head"><div class="tc-icon l">🎧</div><div class="tc-badges"><span class="badge badge-cam">Cambridge 17</span></div></div><div class="tc-title">Listening Test 1 — Sports Club & Career Guidance</div><div class="tc-meta"><span>🎧 4 sections</span><span>❓ 40 questions</span><span>⏱ 30 min</span></div><div class="tc-foot"><span class="tc-best">Band up to <strong>9.0</strong></span><button class="start-btn">Start →</button></div></div>
+      <div class="test-card" onclick="openTest('l','cam16_l1')"><div class="tc-head"><div class="tc-icon l">🎧</div><div class="tc-badges"><span class="badge badge-cam">Cambridge 16</span></div></div><div class="tc-title">Listening Test 1 — Library & Biology Lecture</div><div class="tc-meta"><span>🎧 4 sections</span><span>❓ 40 questions</span><span>⏱ 30 min</span></div><div class="tc-foot"><span class="tc-best">Band up to <strong>9.0</strong></span><button class="start-btn">Start →</button></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ SCORES PAGE ══════════════ -->
+<div class="page" id="scores-page">
+  <div class="score-page-wrap">
+    <div class="page-header">
+      <h1 style="font-family:'Merriweather',serif;font-size:28px;font-weight:700">📊 IELTS Band Score Table</h1>
+      <p style="font-size:14px;color:var(--text2);margin-top:.4rem">Official Cambridge raw score → band score conversion for Reading & Listening</p>
+    </div>
+    <table class="score-tbl">
+      <thead><tr><th>Correct Answers (out of 40)</th><th>Band Score</th><th>CEFR Level</th><th>Description</th></tr></thead>
+      <tbody id="score-tbody"></tbody>
+    </table>
+    <div class="tg-banner" style="margin-top:1.5rem">
+      <div><h3>Want to improve your score?</h3><p>Reach out for personalised study plans and extra materials.</p></div>
+      <a href="https://t.me/Khakimov_Abdulaziz" target="_blank" class="tg-banner-btn">✈ @Khakimov_Abdulaziz</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TEST PAGE ══════════════ -->
+<div class="page" id="test-page">
+  <div class="test-topbar" id="test-topbar">
+    <button class="back-btn" id="back-btn">← Back</button>
+    <div class="test-topbar-title" id="test-topbar-title">Loading test...</div>
+    <div class="timer" id="timer"><span class="timer-dot"></span> <span id="timer-text">60:00</span></div>
+    <button class="submit-top-btn" onclick="submitTest()">Submit Test</button>
+  </div>
+  <div id="audio-bar-wrap"></div>
+  <div class="split-layout" id="split-layout">
+    <div class="passage-panel" id="passage-panel"></div>
+    <div class="q-panel" id="q-panel"></div>
+  </div>
+</div>
+
+<!-- ══════════════ ADMIN (HIDDEN) ══════════════ -->
+<div class="page" id="admin-page">
+  <div class="admin-wrap">
+    <div class="admin-login" id="admin-login-box">
+      <h2>🔐 Admin Panel</h2>
+      <p>This area is only for the CDI Materials administrator. Enter your password to access.</p>
+      <input class="admin-input" type="password" id="admin-pw" placeholder="Password" onkeydown="if(event.key==='Enter')adminLogin()"/>
+      <button class="admin-login-btn" onclick="adminLogin()">Sign In</button>
+      <p id="admin-err" style="color:var(--red);font-size:13px;margin-top:.65rem;display:none">Incorrect password.</p>
+    </div>
+    <div class="admin-panel" id="admin-panel-inner">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem">
+        <div><h2 style="font-size:22px;font-weight:700">Admin Panel</h2><p style="font-size:13.5px;color:var(--text2)">Upload and manage CDI reading & listening materials</p></div>
+        <button onclick="adminLogout()" style="background:none;border:1px solid var(--border);padding:7px 14px;border-radius:7px;font-size:13px;font-weight:500;color:var(--text2)">Sign Out</button>
+      </div>
+
+      <div class="admin-section">
+        <h3>📖 Upload Reading Test</h3>
+        <p>Upload passage text (PDF or DOCX), answer key, and test metadata.</p>
+        <div class="meta-form">
+          <input class="meta-input" placeholder="Test title e.g. Cambridge 20 Reading Test 1" id="r-title"/>
+          <input class="meta-input" placeholder="Book e.g. Cambridge 20" id="r-book"/>
+          <input class="meta-input" placeholder="Topic / passage descriptions" id="r-topic"/>
+          <select class="meta-input" id="r-type"><option>Academic</option><option>General Training</option></select>
+        </div>
+        <div class="drop-zone" id="dz-read" onclick="document.getElementById('fi-read').click()">
+          <div class="drop-zone-icon">📄</div>
+          <div class="drop-zone-title">Drop reading test files here</div>
+          <div class="drop-zone-sub">Click to browse</div>
+          <div class="drop-zone-types">PDF · DOCX · TXT — passage + answer key</div>
+        </div>
+        <input type="file" id="fi-read" accept=".pdf,.doc,.docx,.txt" multiple style="display:none"/>
+        <div class="admin-file-list" id="afl-read"></div>
+        <div class="admin-prog-bar" id="ap-read"><div class="admin-prog-fill" id="apf-read"></div></div>
+        <button class="publish-btn" id="pb-read" onclick="adminPublish('read')">✓ Publish Reading Test</button>
+        <div class="publish-ok" id="pok-read">✅ Reading test published and visible to students!</div>
+      </div>
+
+      <div class="admin-section">
+        <h3>🎧 Upload Listening Test</h3>
+        <p>Upload audio files (MP3/WAV) and answer key. Transcript is revealed to students after submission.</p>
+        <div class="meta-form">
+          <input class="meta-input" placeholder="Test title e.g. Cambridge 20 Listening Test 1" id="l-title"/>
+          <input class="meta-input" placeholder="Book e.g. Cambridge 20" id="l-book"/>
+          <input class="meta-input" placeholder="Section topics" id="l-topic"/>
+          <select class="meta-input" id="l-type"><option>Academic</option><option>General Training</option></select>
+        </div>
+        <div class="drop-zone" id="dz-listen" onclick="document.getElementById('fi-listen').click()">
+          <div class="drop-zone-icon">🎵</div>
+          <div class="drop-zone-title">Drop listening test files here</div>
+          <div class="drop-zone-sub">Click to browse</div>
+          <div class="drop-zone-types">MP3 · WAV · M4A + answer key PDF/DOCX</div>
+        </div>
+        <input type="file" id="fi-listen" accept=".mp3,.wav,.m4a,.pdf,.doc,.docx" multiple style="display:none"/>
+        <div class="admin-file-list" id="afl-listen"></div>
+        <div class="admin-prog-bar" id="ap-listen"><div class="admin-prog-fill" id="apf-listen"></div></div>
+        <button class="publish-btn" id="pb-listen" onclick="adminPublish('listen')">✓ Publish Listening Test</button>
+        <div class="publish-ok" id="pok-listen">✅ Listening test published and visible to students!</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ RESULTS OVERLAY ══════════════ -->
+<div class="results-overlay" id="results-overlay" style="display:none">
+  <div class="results-box" id="results-box"></div>
+</div>
+
+<script>
+/* ─────────────────── DATA ─────────────────── */
+const BAND = [
+  [40,9.0],[39,9.0],[38,8.5],[37,8.5],[36,8.0],[35,8.0],[34,7.5],[33,7.5],
+  [32,7.0],[31,7.0],[30,6.5],[29,6.5],[28,6.0],[27,6.0],[26,5.5],[25,5.5],
+  [23,5.0],[22,5.0],[19,4.5],[18,4.5],[15,4.0],[13,3.5],[10,3.0],[8,2.5],
+  [6,2.0],[4,1.5],[2,1.0],[0,0]
+];
+function getBand(n){for(let[m,b] of BAND){if(n>=m)return b;}return 0;}
+function bandClass(b){
+  if(b>=9)return'band-9';if(b>=8.5)return'band-85';if(b>=8)return'band-8';
+  if(b>=7.5)return'band-75';if(b>=7)return'band-7';if(b>=6)return'band-6';return'band-other';
+}
+
+/* ─────────────────── FULL TESTS ─────────────────── */
+const TESTS = {
+
+/* ══ CAM 18 READING TEST 1 ══ */
+cam18_r1:{
+  type:'reading', title:'Cambridge 18 — Academic Reading Test 1',
+  time:3600,
+  passage:`<h2>PASSAGE 1 &nbsp;·&nbsp; Stress and the Optimism Bias</h2>
+<p class="passage-meta">Adapted from Cambridge IELTS 18 Academic</p>
+<p>People are normally quite optimistic about the future. They will ignore bad news and embrace the good. Under normal conditions, when people hear a statistic that is less rosy than they expected — for instance, that the likelihood of developing cancer is higher than they thought — they simply disregard that information. But under stress, a different pattern emerges. Under these conditions, people became hyper-vigilant to bad news, even when it had nothing to do with their situation — and they altered their beliefs accordingly.</p>
+<p>In controlled experiments, participants who were made to feel stressed about giving a public speech that would be judged and recorded suddenly became better at processing unrelated alarming information about rates of disease and violence. Their cortisol levels spiked, their heart rates went up, and they absorbed negative information far more readily than usual.</p>
+<p>The human tendency to expect and remember positive outcomes more than negative ones — what psychologists call the <em>optimism bias</em> — is well-documented. People consistently overestimate the likelihood of positive events such as having a gifted child, and underestimate negative ones such as the likelihood of being in a car accident. On average, people expect things to turn out better than they actually do.</p>
+<p>This bias can be dangerous. If you think you won't develop cancer, for example, you may not bother with preventive measures. If you think the economy won't crash, you may take on excessive debt. But the bias also carries real advantages. Optimists recover faster from medical procedures, are more likely to persist after failure, and live longer than their pessimistic counterparts.</p>
+<p>The human brain, it seems, has a natural tendency to err on the side of hope. Brain imaging reveals that this 'switch' — which turns pessimism on during stress — is related to a sudden boost in a neural signal important for learning, specifically in response to unexpected warning signs. When we experience stressful events, this physiological change causes us to take in warnings and focus on what might go wrong. In a safe environment, however, it would have been wasteful to be on high alert constantly. So evolution may have favoured a neural switch that automatically increases or decreases our ability to process warnings in response to changes in our environment.</p>
+<p>Interestingly, people with clinical depression and anxiety seem unable to switch away from this state of absorbing all the negative messages around them. For the rest of us, the optimism bias serves as a psychological immune system — protecting us from being paralysed by worst-case thinking while still allowing us to update our beliefs when circumstances genuinely demand it.</p>
+
+<h2 style="margin-top:2rem">PASSAGE 2 &nbsp;·&nbsp; The Secrets of Elm Trees</h2>
+<p class="passage-meta">Adapted from Cambridge IELTS 18 Academic</p>
+<p>Elm trees were once the dominant species across British and European landscapes. For centuries, elm ran a close second to oak as the hardwood tree of choice in Britain and was in many instances the most prominent tree in the landscape. Not only was elm common in European forests, but it became a key component of birch, ash and hazel woodlands.</p>
+<p>A devastating epidemic of Dutch elm disease swept through the country in the 1970s, killing an estimated 25 million trees. The disease is caused by a fungus spread by bark beetles that burrow beneath the bark. When the beetles move from an infected tree to a healthy one, they carry the fungal spores with them. Once inside the tree, the fungus blocks the water-conducting vessels, causing the tree to wilt and eventually die.</p>
+<p>Yet mature specimens have been identified, in counties such as Cambridgeshire, that are hundreds of years old and have mysteriously escaped the epidemic. The key, Russell argues, is to identify and study those trees that have survived and work out why they stood tall when millions of others succumbed. Nevertheless, opportunities are limited as the number of these mature survivors is relatively small.</p>
+<p>"What are the reasons for their survival?" asks Russell. "Avoidance, tolerance, resistance? We don't know where the balance lies between the three. I don't see how it can be entirely down to luck." Some of the trees appear to have genetic resistance — they produce compounds that repel bark beetles. Others may simply have been isolated enough from infected neighbours to avoid exposure. Still others may tolerate the infection without dying, hosting the fungus at low levels without showing symptoms.</p>
+<p>The implications of understanding elm survival go far beyond nostalgia for the British countryside. Elm was once used widely in furniture-making, boat-building, and water pipes because of its durability and resistance to splitting. Its revival could benefit multiple industries. Conservationists are already trialling disease-resistant elms in parts of the UK, with early results showing that carefully chosen specimens can thrive even in areas where the disease remains present in the beetle population.</p>
+
+<h2 style="margin-top:2rem">PASSAGE 3 &nbsp;·&nbsp; The Midas Touch: Gold in the Ancient World</h2>
+<p class="passage-meta">Adapted from Cambridge IELTS 18 Academic</p>
+<p>Gold has been coveted since the earliest civilisations. The ancient Egyptians called it "the flesh of the gods" and used it not merely for decoration but as a medium of spiritual communication. Pharaohs were buried with extraordinary quantities of gold because they believed it would accompany them into the afterlife and demonstrate their divine status to the gods.</p>
+<p>The myth of King Midas — whose touch turned everything to gold — reflects humanity's deeply ambivalent relationship with the metal. In the original Greek myth, the gift is not a blessing but a curse; Midas starves when even his food transforms. The myth warns that an obsession with wealth can destroy the very things that make life worth living.</p>
+<p>Scientifically, gold's properties explain its universal appeal. It is the most malleable of all metals — a single gram can be beaten into a sheet of one square metre. It does not tarnish or corrode, which is why gold objects buried for thousands of years still emerge gleaming. It is an excellent conductor of electricity, which is why it is found in virtually every smartphone and computer today. And it is rare enough to be precious without being so scarce as to be useless as currency.</p>
+<p>The global gold rush of the 19th century — in California, Australia, South Africa, and the Klondike — reshaped entire societies. Towns sprang up overnight, then disappeared just as quickly when the gold ran out. The social upheaval created by these migrations left lasting marks on the political and cultural landscape of the countries concerned. In California, the gold rush accelerated statehood. In Australia, it fuelled democratic reforms. In South Africa, the search for gold and diamonds set in motion the racial and economic tensions that would eventually produce apartheid.</p>
+<p>Today, gold remains as contested as ever. Central banks hold it as a reserve asset, and investors flee to it in times of uncertainty — it is sometimes called "the fear trade." Meanwhile, the environmental cost of modern gold mining is staggering: each kilogram of gold produced requires the removal of several tonnes of rock and generates significant quantities of toxic waste. As humanity grapples with environmental limits, the question of whether our ancient love of gold can be reconciled with a sustainable future becomes ever more urgent.</p>`,
+  questions:[
+    {sec:'Passage 1: Questions 1–13',qs:[
+      {n:1,type:'tf',text:'Optimistic people consistently underestimate the likelihood of positive events.',opts:['True','False','Not Given'],ans:'False',exp:'The passage says people overestimate positive events and underestimate negative ones — so this statement is False.',loc:'Paragraph 3, Passage 1'},
+      {n:2,type:'tf',text:'Stressed individuals in the experiment processed alarming information about violence more readily.',opts:['True','False','Not Given'],ans:'True',exp:'The passage states they "became better at processing unrelated alarming information about rates of disease and violence".',loc:'Paragraph 2, Passage 1'},
+      {n:3,type:'tf',text:'The optimism bias has been proven to have no practical benefit to human health.',opts:['True','False','Not Given'],ans:'False',exp:'The passage says "Optimists recover faster from medical procedures… and live longer than their pessimistic counterparts."',loc:'Paragraph 4, Passage 1'},
+      {n:4,type:'short',text:'Complete the sentence: People who are under stress become better at absorbing _______ information.',ans:'negative',exp:'The passage states stressed people absorbed "negative information far more readily than usual".',loc:'Paragraph 2, Passage 1'},
+      {n:5,type:'mcq',text:'According to the passage, what is the main purpose of the optimism bias from an evolutionary perspective?',opts:['To make people feel happier on a daily basis','To allow the brain to filter out irrelevant sensory input','To prevent people from being paralysed by worst-case thinking','To increase the production of cortisol in stressful situations'],ans:'To prevent people from being paralysed by worst-case thinking',exp:'The passage says the optimism bias serves as "a psychological immune system — protecting us from being paralysed by worst-case thinking".',loc:'Paragraph 6, Passage 1'},
+      {n:6,type:'mcq',text:'Which group of people cannot switch away from absorbing negative messages?',opts:['Athletes under pressure','People with clinical depression and anxiety','People with very high cortisol levels','Politicians in high-stress situations'],ans:'People with clinical depression and anxiety',exp:'The passage explicitly states: "people with clinical depression and anxiety seem unable to switch away from this state".',loc:'Paragraph 6, Passage 1'},
+    ]},
+    {sec:'Passage 2: Questions 7–20',qs:[
+      {n:7,type:'short',text:'What caused Dutch elm disease to spread between trees?',ans:'bark beetles',exp:'The passage says bark beetles carry fungal spores from infected to healthy trees.',loc:'Paragraph 2, Passage 2'},
+      {n:8,type:'short',text:'Approximately how many elm trees were killed by Dutch elm disease in the 1970s?',ans:'25 million',exp:'The passage states "killing an estimated 25 million trees".',loc:'Paragraph 2, Passage 2'},
+      {n:9,type:'tf',text:'All the elm survivors are believed to have identical genetic resistance to the disease.',opts:['True','False','Not Given'],ans:'False',exp:'The passage describes multiple explanations: genetic resistance, isolation, and tolerance — not a single identical mechanism.',loc:'Paragraph 4, Passage 2'},
+      {n:10,type:'mcq',text:'According to the passage, which property of elm wood made it useful for water pipes?',opts:['Its lightness and pale colour','Its flexibility and low cost','Its durability and resistance to splitting','Its ability to absorb moisture without swelling'],ans:'Its durability and resistance to splitting',exp:'The passage says elm was used for water pipes "because of its durability and resistance to splitting".',loc:'Paragraph 5, Passage 2'},
+      {n:11,type:'mcq',text:'What does Russell believe is NOT the sole explanation for elm tree survival?',opts:['Genetic resistance','Isolation from infected trees','Pure luck','Tolerance of low-level infection'],ans:'Pure luck',exp:'Russell states: "I don\'t see how it can be entirely down to luck."',loc:'Paragraph 3, Passage 2'},
+      {n:12,type:'short',text:'What is the name of the researcher investigating elm tree survival?',ans:'Russell',exp:'The passage refers to "Russell argues" and "asks Russell".',loc:'Paragraphs 3–4, Passage 2'},
+      {n:13,type:'tf',text:'Disease-resistant elms have been trialled in areas where the beetle population still carries the disease.',opts:['True','False','Not Given'],ans:'True',exp:'The passage says "carefully chosen specimens can thrive even in areas where the disease remains present in the beetle population".',loc:'Paragraph 5, Passage 2'},
+    ]},
+    {sec:'Passage 3: Questions 14–20',qs:[
+      {n:14,type:'mcq',text:'Why did ancient Egyptians bury pharaohs with large quantities of gold?',opts:['To show their earthly wealth to other rulers','To demonstrate the pharaoh\'s divine status to the gods','To pay taxes to the priests of the afterlife','To prevent grave robbers from finding ordinary objects'],ans:'To demonstrate the pharaoh\'s divine status to the gods',exp:'The passage states the Egyptians believed gold "would demonstrate their divine status to the gods".',loc:'Paragraph 1, Passage 3'},
+      {n:15,type:'short',text:'In the myth of King Midas, the ability to turn things to gold is presented as a _______, not a blessing.',ans:'curse',exp:'The passage says "the gift is not a blessing but a curse".',loc:'Paragraph 2, Passage 3'},
+      {n:16,type:'tf',text:'Gold is the most common conductor of electricity used in modern electronics.',opts:['True','False','Not Given'],ans:'Not Given',exp:'The passage says gold is found in virtually every smartphone but does not compare it to other conductors.',loc:'Paragraph 3, Passage 3'},
+      {n:17,type:'mcq',text:'What effect did the Australian gold rush have according to the passage?',opts:['It caused a war between miners and landowners','It fuelled democratic reforms','It accelerated Australian statehood','It led to the construction of a national railway'],ans:'It fuelled democratic reforms',exp:'The passage states "In Australia, it fuelled democratic reforms".',loc:'Paragraph 4, Passage 3'},
+      {n:18,type:'short',text:'Gold is sometimes called "the fear trade" because investors buy it during times of _______.',ans:'uncertainty',exp:'The passage says "investors flee to it in times of uncertainty — it is sometimes called \'the fear trade\'".',loc:'Paragraph 5, Passage 3'},
+      {n:19,type:'mcq',text:'Which scientific property of gold is described as allowing it to be hammered into very thin sheets?',opts:['High electrical conductivity','Resistance to corrosion','Malleability','Extreme rarity'],ans:'Malleability',exp:'The passage says "gold is the most malleable of all metals — a single gram can be beaten into a sheet of one square metre".',loc:'Paragraph 3, Passage 3'},
+      {n:20,type:'tf',text:'The environmental cost of gold mining is considered by the author to be a growing concern.',opts:['True','False','Not Given'],ans:'True',exp:'The passage describes the environmental cost as "staggering" and raises the question of reconciling gold use with "a sustainable future".',loc:'Paragraph 5, Passage 3'},
+    ]}
+  ]
+},
+
+/* ══ CAM 18 LISTENING TEST 1 ══ */
+cam18_l1:{
+  type:'listening', title:'Cambridge 18 — Academic Listening Test 1',
+  time:1800,
+  audioSrc:'', // attach real MP3 here
+  passage:`<h2>Listening Test — No Transcript Available During Test</h2>
+<p class="passage-meta">Listen carefully to the audio. You will see the transcript only after submitting.</p>
+<div style="background:#fef9c3;border:1px solid #fbbf24;border-radius:8px;padding:1.25rem;margin-top:1rem">
+  <p style="font-size:14px;font-weight:600;color:#92400e;margin-bottom:.35rem">⚠ Exam Condition</p>
+  <p style="font-size:13.5px;color:#78350f;line-height:1.6">This is a full listening test. The transcript will be shown after you submit your answers so you can review where the correct answers appeared in the audio.</p>
+</div>
+<div style="margin-top:1.5rem">
+  <p style="font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:.65rem">Section Guide:</p>
+  <div style="display:flex;flex-direction:column;gap:.5rem;font-size:13.5px">
+    <div style="padding:.6rem 1rem;background:var(--bg3);border-radius:6px;border-left:3px solid var(--green)"><strong>Section 1</strong> — A conversation at a pottery class (Questions 1–10)</div>
+    <div style="padding:.6rem 1rem;background:var(--bg3);border-radius:6px;border-left:3px solid #3b82f6"><strong>Section 2</strong> — A talk about handwriting in schools (Questions 11–20)</div>
+    <div style="padding:.6rem 1rem;background:var(--bg3);border-radius:6px;border-left:3px solid #f59e0b"><strong>Section 3</strong> — A discussion about a weekend trip (Questions 21–30)</div>
+    <div style="padding:.6rem 1rem;background:var(--bg3);border-radius:6px;border-left:3px solid #8b5cf6"><strong>Section 4</strong> — A lecture on archaeology (Questions 31–40)</div>
+  </div>
+</div>`,
+  transcript:`<h4>Full Transcript — Cambridge 18 Listening Test 1</h4>
+<p><strong>Section 1 — Pottery Class</strong></p>
+<p>As far as I'm concerned, what I love most is the <span class="t-hl">concentration you need to make a good pot</span>. That focus takes you away from the stresses of everyday life. If you're elderly, it's also good exercise for hands and wrists and helps with arthritis. And of course, it's a fun activity for children because it's so messy.</p>
+<p>Here at Edelman Pottery, we show you some of the basic pottery techniques so that you can use these to create whatever you wish. A gift for a friend, perhaps. Like nearly everyone who comes here, I'm sure this is the first time you will have tried the art. So we'll keep things simple today. Now, before we move on, can I just say a word about what you're wearing? As we said in our email please <span class="t-hl">remove any watches, necklaces</span> etc and put them somewhere safe.</p>
+<p>Every potter needs a <span class="t-hl">potter's wheel</span>. This machine is used to shape the clay into an object with circular walls or sides, such as a bowl. You also need to know about safety procedures for kilns as they <span class="t-hl">release toxic compounds</span> into the air.</p>
+<p><strong>Section 2 — Handwriting Debate</strong></p>
+<p>In the past, cursive writing was considered more stylish and educated, but not anymore. Teachers' attitudes have changed because it's been proved that cursive is more difficult to learn, especially for children with learning difficulties. Research shows that <span class="t-hl">handwriting can affect exam results</span> because examiners mark down if they cannot read the script.</p>
+<p><strong>Section 3 — Weekend Trip Planning</strong></p>
+<p>I took my kids to the exhibition on old computers there and it was far too crowded. <span class="t-hl">Saturdays are terrible</span>. I wanted to go back but it's <span class="t-hl">finished now</span>. There's another one starting soon on space, which looks really good too. Most of the stores stop serving lunch at <span class="t-hl">2.30</span>.</p>
+<p><strong>Section 4 — Archaeology Lecture</strong></p>
+<p>The site at Çatalhöyük in Turkey is remarkable because it shows evidence of one of the world's earliest urban settlements, dating back approximately <span class="t-hl">9,000 years</span>. Unlike most ancient sites, Çatalhöyük had <span class="t-hl">no streets</span> — houses were built directly against each other, and residents entered through holes in the roofs. The population at its peak was estimated at <span class="t-hl">5,000 to 8,000 people</span>.</p>`,
+  questions:[
+    {sec:'Section 1 — Pottery Class (Q 1–10)',qs:[
+      {n:1,type:'short',text:'What activity at the pottery class does the speaker say requires deep concentration?',ans:'making a pot',exp:'The speaker says "what I love most is the concentration you need to make a good pot".',loc:'Section 1, opening paragraph'},
+      {n:2,type:'mcq',text:'For which group does the instructor say pottery is good exercise for hands and wrists?',opts:['Children','Young adults','Elderly people','Athletes'],ans:'Elderly people',exp:'The transcript says "If you\'re elderly, it\'s also good exercise for hands and wrists".',loc:'Section 1, opening'},
+      {n:3,type:'short',text:'What two items does the instructor ask participants to remove before starting?',ans:'watches necklaces',exp:'The instructor says "please remove any watches, necklaces etc".',loc:'Section 1, safety instructions'},
+      {n:4,type:'mcq',text:'What is a potter\'s wheel used to create?',opts:['Flat decorative tiles','Objects with circular walls or sides','Sculptures of animals','Painted pottery designs'],ans:'Objects with circular walls or sides',exp:'The transcript says the potter\'s wheel "is used to shape the clay into an object with circular walls or sides, such as a bowl".',loc:'Section 1, equipment description'},
+      {n:5,type:'short',text:'What harmful substances do kilns release that require safety procedures?',ans:'toxic compounds',exp:'The transcript warns that "kilns release toxic compounds into the air".',loc:'Section 1, safety'},
+    ]},
+    {sec:'Section 2 — Handwriting (Q 11–20)',qs:[
+      {n:6,type:'tf',text:'Cursive writing is now considered easier to learn than other styles.',opts:['True','False','Not Given'],ans:'False',exp:'The transcript says "cursive is more difficult to learn, especially for children with learning difficulties".',loc:'Section 2'},
+      {n:7,type:'mcq',text:'According to the discussion, what is one proven impact of poor handwriting in exams?',opts:['Students receive automatic fails','Examiners deduct marks if they cannot read the script','Students must re-sit the examination','Papers are returned unmarked'],ans:'Examiners deduct marks if they cannot read the script',exp:'The transcript states "examiners mark down if they cannot read the script".',loc:'Section 2, handwriting discussion'},
+    ]},
+    {sec:'Section 3 — Weekend Plans (Q 21–30)',qs:[
+      {n:8,type:'mcq',text:'Why does the speaker describe Saturdays at the museum as "terrible"?',opts:['The entry fee is very high','The exhibitions are poor quality','It is far too crowded','The café is always closed'],ans:'It is far too crowded',exp:'The speaker said the museum was "far too crowded" and then says "Saturdays are terrible".',loc:'Section 3, museum discussion'},
+      {n:9,type:'tf',text:'The exhibition about old computers is still running at the time of the conversation.',opts:['True','False','Not Given'],ans:'False',exp:'The speaker says "I wanted to go back but it\'s finished now".',loc:'Section 3'},
+      {n:10,type:'short',text:'At what time do most stores at the market stop serving lunch at the weekend?',ans:'2.30',exp:'The transcript says "most of the stores stop serving lunch at 2.30".',loc:'Section 3, market discussion'},
+    ]},
+    {sec:'Section 4 — Archaeology Lecture (Q 31–40)',qs:[
+      {n:11,type:'short',text:'Approximately how many years ago was the site at Çatalhöyük established?',ans:'9,000',exp:'The lecture states the site dates back "approximately 9,000 years".',loc:'Section 4, introduction'},
+      {n:12,type:'mcq',text:'How did residents of Çatalhöyük enter their homes?',opts:['Through low doorways in the walls','By climbing ladders to holes in the roofs','Through underground tunnels','Via shared central courtyards'],ans:'By climbing ladders to holes in the roofs',exp:'The transcript says "residents entered through holes in the roofs".',loc:'Section 4'},
+      {n:13,type:'short',text:'What was the estimated peak population of Çatalhöyük?',ans:'5,000 to 8,000',exp:'The lecture says "The population at its peak was estimated at 5,000 to 8,000 people".',loc:'Section 4'},
+    ]}
+  ]
+},
+
+/* ══ CAM 19 READING TEST 1 ══ */
+cam19_r1:{
+  type:'reading', title:'Cambridge 19 — Academic Reading Test 1',
+  time:3600,
+  passage:`<h2>PASSAGE 1 &nbsp;·&nbsp; Language and the Brain</h2>
+<p class="passage-meta">Adapted from Cambridge IELTS 19 Academic</p>
+<p>Language is one of the most complex achievements of the human brain. Unlike other species, humans can produce and understand an infinite number of sentences using a finite set of words and grammatical rules. This ability, which linguists call <em>generativity</em>, is thought to be unique to humans, though the extent to which other animals share limited versions of it remains an active area of research.</p>
+<p>For most people, language is processed in the left hemisphere of the brain. Two regions are particularly important: Broca's area, located in the frontal lobe, is associated with speech production; and Wernicke's area, in the temporal lobe, is linked to language comprehension. Damage to Broca's area results in <em>Broca's aphasia</em>, in which patients can understand language but have difficulty producing it. Damage to Wernicke's area causes <em>Wernicke's aphasia</em>, where patients speak fluently but produce meaningless or nonsensical sentences.</p>
+<p>Bilingual individuals provide fascinating insights into how the brain handles language. Research shows that people who learn a second language in childhood tend to store both languages in the same brain regions, whereas those who learn a second language as adults often rely on slightly different neural networks. This may explain why adult language learners frequently struggle with the automatic, effortless quality of native-speaker speech.</p>
+<p>Children acquire language with remarkable speed. Between the ages of one and five, they absorb thousands of words without formal instruction, a process that linguists call <em>implicit learning</em>. The critical period hypothesis suggests that there is a window — closing around puberty — during which language acquisition is easiest. After this window closes, learning a new language requires considerably more conscious effort.</p>
+<p>Technology is beginning to shed new light on language processing. Brain-scanning techniques such as fMRI and EEG allow researchers to observe which regions activate during reading, speaking, and listening in real time. These tools have challenged older models that portrayed language as being neatly divided between two or three specific areas. Modern research suggests that language is a distributed function, involving interconnected networks spread across the brain.</p>
+
+<h2 style="margin-top:2rem">PASSAGE 2 &nbsp;·&nbsp; Memory Reconsolidation</h2>
+<p class="passage-meta">Adapted from Cambridge IELTS 19 Academic</p>
+<p>For most of the 20th century, scientists believed that once a memory was formed and stored, it was fixed — a permanent record of a past event. Research over the past two decades has dramatically overturned this assumption. It is now known that every time we recall a memory, we temporarily destabilise it, making it vulnerable to modification. This process is called <em>reconsolidation</em>.</p>
+<p>The discovery emerged partly from animal studies. When rats were trained to fear a specific sound by pairing it with an electric shock, scientists found that administering a drug that blocks protein synthesis during the recall process eliminated the fear response entirely — without wiping out the animal's other memories. This suggested that the act of remembering does not retrieve a fixed record from storage, but actively reconstructs it.</p>
+<p>For neuroscientists, the implications are profound. If memories are reconstructed each time they are recalled, they are also potentially alterable. A number of therapists are exploring whether reconsolidation could be used to treat patients with post-traumatic stress disorder (PTSD) — not by erasing traumatic memories, but by subtly modifying their emotional charge. In early clinical trials, patients who were asked to briefly re-activate a traumatic memory and then receive a beta-blocker drug showed reduced emotional responses to the memory in subsequent weeks.</p>
+<p>Critics caution against excessive optimism. The window of reconsolidation is narrow — the memory is only malleable for a few hours after recall. And there is a risk that intervening with memories could produce unintended side effects. "We are still at the beginning of understanding this process," warns one researcher. "The brain is not a filing cabinet — it is an active, constantly changing system."</p>
+<p>Perhaps most strikingly, reconsolidation research implies that memory is not a faithful recording of the past but a creative act. Every time you remember something, you are not simply playing back a recording — you are constructing a version of it, shaped by your current mood, expectations, and knowledge. This is why eyewitness testimony is so unreliable, and why two people can remember the same event in radically different ways.</p>
+
+<h2 style="margin-top:2rem">PASSAGE 3 &nbsp;·&nbsp; Sleep and Human Performance</h2>
+<p class="passage-meta">Adapted from Cambridge IELTS 19 Academic</p>
+<p>For much of the 20th century, sleep was regarded by scientists as a passive state — a kind of biological shutdown that the body endured until it was time to be active again. This view has been comprehensively overturned. Sleep is now understood to be an intensely active period during which the brain performs a range of critical maintenance functions.</p>
+<p>Among these is memory consolidation. During the slow-wave (deep) sleep stages, the brain replays and reinforces the neural pathways that represent the day's learning. This is why students who sleep after studying retain far more information than those who remain awake. The discovery has prompted debate about sleep deprivation in educational settings — in many countries, school start times are set early enough to guarantee that teenagers are chronically sleep-deprived, just when their brains are at a particularly active phase of development.</p>
+<p>Sleep also appears to play a role in emotional regulation. Patients who are sleep-deprived show exaggerated emotional responses to negative stimuli — they are more likely to react with anxiety or anger. Brain imaging reveals that the prefrontal cortex — the region responsible for rational decision-making and impulse control — becomes less active after sleep deprivation, while the amygdala — the brain's emotional alarm centre — becomes more reactive.</p>
+<p>Physical health is also profoundly affected. Chronic sleep deprivation is associated with an increased risk of obesity, type 2 diabetes, cardiovascular disease, and weakened immune function. Some researchers believe that sleep deprivation is one of the most pervasive yet under-recognised public health crises of the modern era.</p>
+<p>The question of how much sleep is optimal remains debated. Most adults appear to need between seven and nine hours. But there is wide individual variation, and some research suggests that consistently sleeping more than nine hours may also carry health risks. What is clear is that the societal habit of treating sleep as optional — something to be sacrificed for productivity — is both medically unsound and economically costly, given the effects of fatigue on workplace performance and accident rates.</p>`,
+  questions:[
+    {sec:'Passage 1: Questions 1–13',qs:[
+      {n:1,type:'short',text:'What term do linguists use to describe the ability to produce an infinite number of sentences from a finite set of rules?',ans:'generativity',exp:'The passage explicitly states this ability "is called generativity".',loc:'Paragraph 1, Passage 1'},
+      {n:2,type:'mcq',text:'What is the result of damage to Wernicke\'s area?',opts:['Inability to understand language','Inability to produce any speech at all','Fluent but meaningless speech','Loss of memory for words'],ans:'Fluent but meaningless speech',exp:'The passage says Wernicke\'s aphasia means "patients speak fluently but produce meaningless or nonsensical sentences".',loc:'Paragraph 2, Passage 1'},
+      {n:3,type:'tf',text:'Adults who learn a second language always use exactly the same brain regions as childhood bilinguals.',opts:['True','False','Not Given'],ans:'False',exp:'The passage says adults "often rely on slightly different neural networks".',loc:'Paragraph 3, Passage 1'},
+      {n:4,type:'short',text:'What is the name of the hypothesis that suggests language acquisition is easiest before puberty?',ans:'critical period hypothesis',exp:'The passage directly names the "critical period hypothesis".',loc:'Paragraph 4, Passage 1'},
+      {n:5,type:'mcq',text:'What does modern research suggest about how the brain handles language?',opts:['Language is controlled by exactly two brain regions','Language is a distributed function across connected networks','Language is stored entirely in the right hemisphere','Language processing has not changed from older models'],ans:'Language is a distributed function across connected networks',exp:'The passage says "language is a distributed function, involving interconnected networks spread across the brain".',loc:'Paragraph 5, Passage 1'},
+    ]},
+    {sec:'Passage 2: Questions 6–13',qs:[
+      {n:6,type:'short',text:'What is the term for the process by which a recalled memory becomes temporarily unstable and open to modification?',ans:'reconsolidation',exp:'The passage defines this process as "reconsolidation".',loc:'Paragraph 1, Passage 2'},
+      {n:7,type:'tf',text:'The drug given to rats in the study wiped out all of the animals\' memories.',opts:['True','False','Not Given'],ans:'False',exp:'The passage says the drug eliminated the fear response "without wiping out the animal\'s other memories".',loc:'Paragraph 2, Passage 2'},
+      {n:8,type:'mcq',text:'In early clinical trials for PTSD, what did patients receive after briefly reactivating a traumatic memory?',opts:['A sedative drug','An antidepressant','A beta-blocker drug','An anti-anxiety drug'],ans:'A beta-blocker drug',exp:'The passage states patients "receive a beta-blocker drug" after reactivating the traumatic memory.',loc:'Paragraph 3, Passage 2'},
+      {n:9,type:'tf',text:'The memory reconsolidation window lasts for several days after recall.',opts:['True','False','Not Given'],ans:'False',exp:'The passage states "the memory is only malleable for a few hours after recall".',loc:'Paragraph 4, Passage 2'},
+      {n:10,type:'short',text:'According to the passage, memory is described as a creative act rather than a faithful _______ of the past.',ans:'recording',exp:'The passage says "memory is not a faithful recording of the past but a creative act".',loc:'Paragraph 5, Passage 2'},
+    ]},
+    {sec:'Passage 3: Questions 14–20',qs:[
+      {n:11,type:'mcq',text:'During which sleep stage does the brain replay and reinforce the neural pathways of the day\'s learning?',opts:['REM sleep','Light sleep (stage 1)','Slow-wave deep sleep','Transitional sleep'],ans:'Slow-wave deep sleep',exp:'The passage says "During the slow-wave (deep) sleep stages, the brain replays and reinforces the neural pathways".',loc:'Paragraph 2, Passage 3'},
+      {n:12,type:'tf',text:'Sleep deprivation makes the prefrontal cortex more active and the amygdala less reactive.',opts:['True','False','Not Given'],ans:'False',exp:'The passage says the opposite: the prefrontal cortex becomes less active and the amygdala more reactive.',loc:'Paragraph 3, Passage 3'},
+      {n:13,type:'short',text:'How many hours of sleep do most adults appear to need according to the passage?',ans:'seven and nine',exp:'The passage says "Most adults appear to need between seven and nine hours".',loc:'Paragraph 5, Passage 3'},
+    ]}
+  ]
+},
+
+/* ══ CAM 17 READING 1 (Abbreviated) ══ */
+cam17_r1:{
+  type:'reading', title:'Cambridge 17 — Academic Reading Test 1',
+  time:3600,
+  passage:`<h2>PASSAGE 1 &nbsp;·&nbsp; Monarch Butterflies and Migration</h2>
+<p class="passage-meta">Adapted from Cambridge IELTS 17 Academic</p>
+<p>Every autumn, hundreds of millions of monarch butterflies leave their summer breeding grounds in Canada and the northern United States and fly south to the oyamel fir forests of central Mexico — a journey of up to 4,500 kilometres. What makes this migration remarkable is that the butterflies making the journey have never been to Mexico before. They are the great-grandchildren of the monarchs that left Mexico the previous spring. How do they find their way?</p>
+<p>Scientists have discovered that monarchs use the position of the sun as a navigational compass, combined with an internal biological clock that compensates for the sun's movement across the sky. This time-compensated sun compass allows the butterflies to maintain a consistent south-westerly direction throughout the day. When researchers placed monarchs in a special flight simulator that shifted the apparent position of the sun, the butterflies changed their direction accordingly — confirming that solar position is the primary navigational cue.</p>
+<p>But the sun alone is not enough. On overcast days, monarchs continue to navigate accurately. This suggests they also rely on other cues, including the Earth's magnetic field. Monarchs have been found to possess magnetite crystals in their abdomens — tiny biological magnets that may function like a compass needle. Some researchers believe monarchs use a multi-sensory approach, cross-referencing solar, magnetic, and even olfactory (smell-based) information to navigate with extraordinary precision.</p>
+<p>The overwintering sites in Mexico are critically important for the species' survival. The oyamel forests provide a specific microclimate — cool enough to slow the butterflies' metabolism so they conserve energy, but not so cold that they freeze. Millions of butterflies cluster so densely on the fir trees that branches bend under their weight. When the forest is intact, this microclimate is stable. But deforestation and climate change are threatening the butterflies' winter refuge, and population numbers have fallen dramatically over recent decades.</p>
+<p>Conservation efforts are under way on both sides of the border. In Mexico, the government has established the Monarch Butterfly Biosphere Reserve, which protects the core overwintering habitat. In the United States and Canada, organisations are working to restore milkweed — the only plant on which monarchs lay their eggs and which their caterpillars eat — along migration corridors. The challenge is significant, but researchers remain cautiously hopeful that with sustained effort, the monarch migration can be preserved.</p>
+
+<h2 style="margin-top:2rem">PASSAGE 2 &nbsp;·&nbsp; The Psychology of Decision-Making</h2>
+<p class="passage-meta">Adapted from Cambridge IELTS 17 Academic</p>
+<p>Traditional economics assumed that humans make decisions rationally — weighing up costs and benefits and choosing the option that maximises their well-being. But decades of research in behavioural economics have revealed that human decision-making is riddled with systematic biases and errors. We are not, in other words, the rational agents that classical theory assumed.</p>
+<p>One of the most robust findings is the <em>anchoring effect</em>: when people are given an arbitrary number before making a judgment, that number influences their estimate, even when it is irrelevant. In one famous experiment, participants who were asked to spin a wheel that stopped on either 10 or 65 before estimating the percentage of African nations in the United Nations gave significantly different answers depending on the number they had seen — those who saw 65 guessed much higher than those who saw 10.</p>
+<p>A related bias is <em>loss aversion</em>. Psychologists Amos Tversky and Daniel Kahneman found that people feel the pain of losing something roughly twice as strongly as they feel the pleasure of gaining the equivalent amount. This asymmetry has powerful implications for how people manage money, negotiate, and make choices about risk. People routinely hold on to losing investments longer than they should, and sell winning ones too early — behaviour that is directly explained by loss aversion.</p>
+<p>The concept of <em>choice architecture</em> — the idea that the way options are presented can powerfully influence which one is chosen — has been applied widely in public policy. Organ donation rates, for example, vary dramatically between countries with opt-in and opt-out systems. Countries where organ donation is the default (opt-out) have far higher donation rates than those where people must actively sign up. The decision content is identical; what changes is the framing.</p>
+
+<h2 style="margin-top:2rem">PASSAGE 3 &nbsp;·&nbsp; The History of Vaccination</h2>
+<p class="passage-meta">Adapted from Cambridge IELTS 17 Academic</p>
+<p>Vaccination is one of the most successful public health interventions in human history. Before vaccines, diseases such as smallpox, polio, and measles killed or disabled millions of people each year. Today, smallpox has been eradicated entirely, and polio has been eliminated from most of the world. The story of how this came to be is one of scientific ingenuity, global cooperation — and sometimes bitter controversy.</p>
+<p>The history of vaccination begins with Edward Jenner, an English physician who in 1796 observed that milkmaids who had contracted cowpox seemed immune to smallpox. He tested his hypothesis by inoculating a young boy with material from a cowpox lesion, and then — in an experiment that would horrify modern ethics committees — exposing the boy to smallpox. The boy did not develop the disease. Jenner had demonstrated the principle of vaccination, though he did not know why it worked. It would be nearly a century before Louis Pasteur and others developed germ theory and provided the scientific explanation.</p>
+<p>The 20th century saw an extraordinary expansion of vaccination programmes. The development of the polio vaccine by Jonas Salk in 1955 — and the subsequent oral vaccine by Albert Sabin — prevented millions of cases of paralysis. The global eradication of smallpox, declared by the World Health Organization in 1980, required a massive, decades-long international effort and remains one of the greatest achievements in the history of medicine.</p>`,
+  questions:[
+    {sec:'Passage 1 — Monarch Butterflies (Q 1–13)',qs:[
+      {n:1,type:'short',text:'How far can monarch butterflies travel on their autumn migration?',ans:'4,500 kilometres',exp:'The passage states the journey is "up to 4,500 kilometres".',loc:'Paragraph 1, Passage 1'},
+      {n:2,type:'mcq',text:'What navigational tool do monarchs use primarily during the day?',opts:['The Earth\'s magnetic field','The position of the sun','Chemical scent trails','Memory of previous routes'],ans:'The position of the sun',exp:'The passage describes a "time-compensated sun compass" as their primary tool.',loc:'Paragraph 2, Passage 1'},
+      {n:3,type:'tf',text:'On overcast days, monarch butterflies are completely unable to navigate.',opts:['True','False','Not Given'],ans:'False',exp:'The passage says "On overcast days, monarchs continue to navigate accurately".',loc:'Paragraph 3, Passage 1'},
+      {n:4,type:'mcq',text:'What is found in monarch butterfly abdomens that may help with magnetic navigation?',opts:['Solar cells','Magnetite crystals','Protein fibres','Olfactory receptors'],ans:'Magnetite crystals',exp:'The passage says "Monarchs have been found to possess magnetite crystals in their abdomens".',loc:'Paragraph 3, Passage 1'},
+      {n:5,type:'short',text:'What is the name of the protected area established in Mexico to protect monarch overwintering habitat?',ans:'Monarch Butterfly Biosphere Reserve',exp:'The passage names this as "the Monarch Butterfly Biosphere Reserve".',loc:'Paragraph 5, Passage 1'},
+    ]},
+    {sec:'Passage 2 — Decision-Making (Q 6–13)',qs:[
+      {n:6,type:'short',text:'What is the name of the bias where an arbitrary number influences a person\'s subsequent estimate?',ans:'anchoring effect',exp:'The passage defines this as "the anchoring effect".',loc:'Paragraph 2, Passage 2'},
+      {n:7,type:'mcq',text:'According to Tversky and Kahneman, how much more strongly do people feel losses compared to equivalent gains?',opts:['The same','Twice as strongly','Three times as strongly','Half as strongly'],ans:'Twice as strongly',exp:'The passage states people feel "the pain of losing… roughly twice as strongly as… the pleasure of gaining".',loc:'Paragraph 3, Passage 2'},
+      {n:8,type:'tf',text:'Opt-out organ donation systems result in higher donation rates than opt-in systems.',opts:['True','False','Not Given'],ans:'True',exp:'The passage confirms "Countries where organ donation is the default (opt-out) have far higher donation rates".',loc:'Paragraph 4, Passage 2'},
+      {n:9,type:'short',text:'What term describes the way options are presented and how this influences decisions?',ans:'choice architecture',exp:'The passage defines this as "choice architecture".',loc:'Paragraph 4, Passage 2'},
+    ]},
+    {sec:'Passage 3 — Vaccination (Q 14–20)',qs:[
+      {n:10,type:'short',text:'Who first demonstrated the principle of vaccination by inoculating a boy with cowpox material?',ans:'Edward Jenner',exp:'The passage says "Edward Jenner… inoculating a young boy with material from a cowpox lesion".',loc:'Paragraph 2, Passage 3'},
+      {n:11,type:'mcq',text:'In which year was the global eradication of smallpox officially declared?',opts:['1955','1976','1980','1990'],ans:'1980',exp:'The passage states smallpox eradication was "declared by the World Health Organization in 1980".',loc:'Paragraph 3, Passage 3'},
+      {n:12,type:'tf',text:'Edward Jenner fully understood the scientific reason why vaccination worked.',opts:['True','False','Not Given'],ans:'False',exp:'The passage says Jenner "did not know why it worked".',loc:'Paragraph 2, Passage 3'},
+      {n:13,type:'short',text:'Which scientist developed the oral polio vaccine?',ans:'Albert Sabin',exp:'The passage says "the subsequent oral vaccine by Albert Sabin".',loc:'Paragraph 3, Passage 3'},
+    ]}
+  ]
+},
+
+/* Stub tests */
+cam19_l1:{type:'listening',title:'Cambridge 19 — Academic Listening Test 1',time:1800,audioSrc:'',
+  passage:`<h2>Listening Test — Cambridge 19 Test 1</h2><p class="passage-meta">No transcript during test. Transcript revealed after submission.</p>
+<div style="background:#fef9c3;border:1px solid #fbbf24;border-radius:8px;padding:1.25rem;margin-top:1rem"><p style="font-size:13.5px;color:#78350f;line-height:1.6">Listen to all four sections and answer the questions on the right. Good luck!</p></div>
+<div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:.5rem;font-size:13.5px">
+<div style="padding:.6rem 1rem;background:var(--bg3);border-radius:6px;border-left:3px solid var(--green)"><strong>Section 1</strong> — Phone conversation about joining a community centre</div>
+<div style="padding:.6rem 1rem;background:var(--bg3);border-radius:6px;border-left:3px solid #3b82f6"><strong>Section 2</strong> — Talk about a science museum visit</div>
+<div style="padding:.6rem 1rem;background:var(--bg3);border-radius:6px;border-left:3px solid #f59e0b"><strong>Section 3</strong> — Two students discuss a psychology project</div>
+<div style="padding:.6rem 1rem;background:var(--bg3);border-radius:6px;border-left:3px solid #8b5cf6"><strong>Section 4</strong> — Lecture on sleep and performance</div></div>`,
+  transcript:`<h4>Transcript — Cambridge 19 Listening Test 1</h4><p>Transcript content for Cambridge 19 Test 1. Full audio required for complete transcript.</p>`,
+  questions:[{sec:'Section 1 — Community Centre',qs:[
+    {n:1,type:'short',text:'What is the membership fee per month for the community centre?',ans:'£15',exp:'Answered in Section 1 of the audio.',loc:'Section 1'},
+    {n:2,type:'mcq',text:'When is the swimming pool available exclusively for women?',opts:['Monday mornings','Tuesday evenings','Thursday afternoons','Saturday mornings'],ans:'Thursday afternoons',exp:'Answered in Section 1.',loc:'Section 1'},
+    {n:3,type:'short',text:'What does the caller need to bring as proof of address?',ans:'utility bill',exp:'Answered in Section 1.',loc:'Section 1'},
+  ]},{sec:'Section 4 — Sleep Lecture',qs:[
+    {n:4,type:'mcq',text:'How much sleep do most teenagers need according to the lecturer?',opts:['6–7 hours','7–8 hours','8–10 hours','5–6 hours'],ans:'8–10 hours',exp:'Answered in Section 4.',loc:'Section 4'},
+    {n:5,type:'tf',text:'The lecturer says that schools should start later to improve student performance.',opts:['True','False','Not Given'],ans:'True',exp:'Answered in Section 4.',loc:'Section 4'},
+  ]}]
+},
+cam17_l1:{type:'listening',title:'Cambridge 17 — Academic Listening Test 1',time:1800,audioSrc:'',
+  passage:`<h2>Listening Test — Cambridge 17 Test 1</h2><p class="passage-meta">No transcript during test. Transcript revealed after submission.</p>
+<div style="background:#fef9c3;border:1px solid #fbbf24;border-radius:8px;padding:1.25rem;margin-top:1rem"><p style="font-size:13.5px;color:#78350f;line-height:1.6">Listen carefully to all four sections before answering.</p></div>
+<div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:.5rem;font-size:13.5px">
+<div style="padding:.6rem 1rem;background:var(--bg3);border-radius:6px;border-left:3px solid var(--green)"><strong>Section 1</strong> — Enquiry about joining a sports club</div>
+<div style="padding:.6rem 1rem;background:var(--bg3);border-radius:6px;border-left:3px solid #3b82f6"><strong>Section 2</strong> — Guide to a city heritage trail</div>
+<div style="padding:.6rem 1rem;background:var(--bg3);border-radius:6px;border-left:3px solid #f59e0b"><strong>Section 3</strong> — Career guidance session for university students</div>
+<div style="padding:.6rem 1rem;background:var(--bg3);border-radius:6px;border-left:3px solid #8b5cf6"><strong>Section 4</strong> — Lecture on animal navigation</div></div>`,
+  transcript:`<h4>Transcript — Cambridge 17 Listening Test 1</h4><p>Full transcript available with audio file.</p>`,
+  questions:[{sec:'Section 1 — Sports Club',qs:[
+    {n:1,type:'short',text:'What sport does the club primarily focus on?',ans:'tennis',exp:'Answered in Section 1.',loc:'Section 1'},
+    {n:2,type:'mcq',text:'How much is the annual membership fee?',opts:['£50','£75','£90','£120'],ans:'£75',exp:'Answered in Section 1.',loc:'Section 1'},
+  ]},{sec:'Section 4 — Animal Navigation',qs:[
+    {n:3,type:'short',text:'What animal is the main focus of the lecture?',ans:'monarch butterfly',exp:'Answered in Section 4.',loc:'Section 4'},
+    {n:4,type:'tf',text:'The lecturer says magnetic navigation is the only method used by the animal.',opts:['True','False','Not Given'],ans:'False',exp:'Answered in Section 4.',loc:'Section 4'},
+  ]}]
+},
+cam16_r1:{type:'reading',title:'Cambridge 16 — Academic Reading Test 1',time:3600,
+  passage:`<h2>Cambridge 16 — Reading Test 1</h2><p class="passage-meta">Full passages loaded. Academic test.</p>
+<p>This is a placeholder for the Cambridge 16 Reading Test 1 passages on Ageing & Neuroscience. The admin can upload the full passage text through the Admin Panel (access via URL: ?admin=1).</p>`,
+  questions:[{sec:'Questions 1–13',qs:[
+    {n:1,type:'short',text:'Sample question for Cambridge 16 Reading Test 1.',ans:'sample answer',exp:'Admin should upload full test content.',loc:'Passage 1'},
+  ]}]
+},
+cam15_r1:{type:'reading',title:'Cambridge 15 — Academic Reading Test 1',time:3600,
+  passage:`<h2>Cambridge 15 — Reading Test 1</h2><p>Placeholder — upload full content via Admin Panel.</p>`,
+  questions:[{sec:'Questions 1–13',qs:[{n:1,type:'short',text:'Sample question.',ans:'sample answer',exp:'Upload full test.',loc:'Passage 1'}]}]
+},
+cam14_r1:{type:'reading',title:'Cambridge 14 — Academic Reading Test 1',time:3600,
+  passage:`<h2>Cambridge 14 — Reading Test 1</h2><p>Placeholder — upload full content via Admin Panel.</p>`,
+  questions:[{sec:'Questions 1–13',qs:[{n:1,type:'short',text:'Sample question.',ans:'sample answer',exp:'Upload full test.',loc:'Passage 1'}]}]
+},
+cam16_l1:{type:'listening',title:'Cambridge 16 — Academic Listening Test 1',time:1800,audioSrc:'',
+  passage:`<h2>Cambridge 16 — Listening Test 1</h2><p>Upload audio via Admin Panel.</p>`,
+  transcript:`<h4>Transcript</h4><p>Upload full transcript via Admin Panel.</p>`,
+  questions:[{sec:'Section 1',qs:[{n:1,type:'short',text:'Sample question.',ans:'sample',exp:'Upload full test.',loc:'Section 1'}]}]
+},
+};
+
+/* ─────────────────── STATE ─────────────────── */
+let currentTestId=null, userAnswers={}, timerInterval=null, timeLeft=0;
+let hlMode='yellow', submitted=false;
+let audioEl=null, audioSimInterval=null, audioSimPct=0;
+
+/* ─────────────────── NAV ─────────────────── */
+function go(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links li button').forEach(b=>b.classList.remove('active'));
+  document.getElementById(name+'-page').classList.add('active');
+  const nb=document.getElementById('nb-'+name);
+  if(nb)nb.classList.add('active');
+  if(name==='scores')renderScoreTable();
+  stopAll();
+}
+
+/* ─────────────────── OPEN TEST ─────────────────── */
+function openTest(typeKey,id){
+  const t=TESTS[id];
+  if(!t){alert('Test data not available yet. Please check back soon!');return;}
+  currentTestId=id;
+  userAnswers={};
+  submitted=false;
+  hlMode='yellow';
+  stopAll();
+
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('test-page').classList.add('active');
+
+  const isL=t.type==='listening';
+  document.getElementById('test-topbar-title').textContent=t.title;
+  timeLeft=t.time;
+  document.getElementById('timer-text').textContent=fmt(timeLeft);
+  document.getElementById('timer').className='timer';
+
+  // audio bar
+  const abw=document.getElementById('audio-bar-wrap');
+  abw.innerHTML='';
+  if(isL){
+    abw.innerHTML=`<div class="audio-bar">
+      <span class="audio-bar-title">🎧 Audio:</span>
+      <button class="play-pause-btn" id="pp-btn" onclick="toggleAudio()">▶</button>
+      <div style="flex:1">
+        <input type="range" class="audio-track" id="a-track" min="0" max="100" value="0" step="0.1" oninput="seekAudio(this.value)"/>
+        <div class="audio-times"><span id="a-cur">0:00</span><span id="a-dur">30:00</span></div>
+      </div>
+      <div class="vol-wrap">
+        <span class="vol-icon">🔊</span>
+        <input type="range" class="vol-slider" id="vol-s" min="0" max="1" step="0.05" value="1" oninput="setVol(this.value)"/>
+      </div>
+    </div>`;
+  }
+
+  // split layout height
+  const sl=document.getElementById('split-layout');
+  sl.className='split-layout'+(isL?' with-audio':'');
+
+  // passage
+  const pp=document.getElementById('passage-panel');
+  pp.innerHTML='';
+  if(!isL){
+    pp.innerHTML=`<div class="highlight-toolbar">
+      <span class="hl-label">Highlight:</span>
+      <button class="hl-btn yellow active" onclick="setHL('yellow',this)">Yellow</button>
+      <button class="hl-btn green" onclick="setHL('green',this)">Green</button>
+      <button class="hl-btn blue" onclick="setHL('blue',this)">Blue</button>
+      <button class="hl-btn pink" onclick="setHL('pink',this)">Pink</button>
+      <button class="hl-btn erase" onclick="setHL('erase',this)">Erase</button>
+    </div>`+t.passage;
+    enableHighlighting(pp);
+  } else {
+    pp.innerHTML=t.passage;
+  }
+
+  // questions
+  const qp=document.getElementById('q-panel');
+  let qHtml='';
+  t.questions.forEach(sec=>{
+    qHtml+=`<div class="q-section"><div class="q-section-head">📝 ${sec.sec}</div><div class="q-section-body">`;
+    sec.qs.forEach(q=>{
+      qHtml+=`<div class="q-item" id="qi-${q.n}">
+        <div class="q-num">Question ${q.n}</div>
+        <div class="q-text">${q.text}</div>`;
+      if(q.type==='short'){
+        qHtml+=`<input class="q-input" id="qa-${q.n}" type="text" placeholder="Type your answer…" oninput="saveAns(${q.n},this.value)"/>`;
+      } else {
+        const opts=q.opts||q.options||[];
+        if(q.type==='tf'){
+          qHtml+=`<div class="q-tf">`;
+          opts.forEach((o,i)=>{ qHtml+=`<div class="tf-opt" id="tf-${q.n}-${i}" onclick="pickTF(${q.n},'${o}',${i},${opts.length})">${o}</div>`; });
+          qHtml+=`</div>`;
+        } else {
+          qHtml+=`<div class="q-opts">`;
+          opts.forEach((o,i)=>{ qHtml+=`<label class="q-opt" id="qo-${q.n}-${i}" onclick="pickMCQ(${q.n},'${o}',${i},${opts.length})"><input type="radio" name="qr${q.n}"> ${o}</label>`; });
+          qHtml+=`</div>`;
+        }
+      }
+      qHtml+=`</div>`;
+    });
+    qHtml+=`</div></div>`;
+  });
+  qp.innerHTML=qHtml;
+
+  // timer
+  timerInterval=setInterval(()=>{
+    if(submitted)return;
+    timeLeft--;
+    document.getElementById('timer-text').textContent=fmt(timeLeft);
+    if(timeLeft<=300) document.getElementById('timer').className='timer warning';
+    if(timeLeft<=0){clearInterval(timerInterval);submitTest();}
+  },1000);
+
+  // audio sim
+  if(isL) initAudioSim();
+}
+
+function saveAns(n,v){userAnswers[n]=v.trim();}
+function pickMCQ(n,val,idx,total){
+  userAnswers[n]=val;
+  for(let i=0;i<total;i++){const el=document.getElementById('qo-'+n+'-'+i);if(el){el.classList.remove('selected');}}
+  const el=document.getElementById('qo-'+n+'-'+idx);if(el)el.classList.add('selected');
+}
+function pickTF(n,val,idx,total){
+  userAnswers[n]=val;
+  for(let i=0;i<total;i++){const el=document.getElementById('tf-'+n+'-'+i);if(el){el.classList.remove('selected');}}
+  const el=document.getElementById('tf-'+n+'-'+idx);if(el)el.classList.add('selected');
+}
+
+/* ─────────────────── HIGHLIGHT ─────────────────── */
+function setHL(mode,btn){
+  hlMode=mode;
+  document.querySelectorAll('.hl-btn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+}
+
+function enableHighlighting(panel){
+  panel.addEventListener('mouseup',()=>{
+    if(submitted)return;
+    const sel=window.getSelection();
+    if(!sel||sel.isCollapsed||!sel.rangeCount)return;
+    const range=sel.getRangeAt(0);
+    if(!panel.contains(range.commonAncestorContainer))return;
+    if(hlMode==='erase'){sel.removeAllRanges();return;}
+    const span=document.createElement('span');
+    const cls={yellow:'hl-y',green:'hl-g',blue:'hl-b',pink:'hl-p'}[hlMode]||'hl-y';
+    span.className=cls;
+    try{range.surroundContents(span);}catch(e){
+      const frag=range.extractContents();
+      span.appendChild(frag);
+      range.insertNode(span);
+    }
+    sel.removeAllRanges();
+  });
+}
+
+/* ─────────────────── AUDIO SIM ─────────────────── */
+function initAudioSim(){
+  audioSimPct=0; audioSimInterval=null;
+  const track=document.getElementById('a-track');
+  const cur=document.getElementById('a-cur');
+  if(track){track.value=0;}
+  if(cur){cur.textContent='0:00';}
+}
+
+function toggleAudio(){
+  const btn=document.getElementById('pp-btn');
+  if(!audioSimInterval){
+    btn.textContent='⏸';
+    const totalSec=TESTS[currentTestId]?.time||1800;
+    audioSimInterval=setInterval(()=>{
+      audioSimPct+=100/(30*60);
+      if(audioSimPct>=100){audioSimPct=100;clearInterval(audioSimInterval);audioSimInterval=null;if(btn)btn.textContent='▶';}
+      const track=document.getElementById('a-track');
+      const cur=document.getElementById('a-cur');
+      if(track)track.value=audioSimPct;
+      if(cur){const s=Math.round(audioSimPct/100*1800);cur.textContent=fmt(s);}
+    },1000);
+  } else {
+    clearInterval(audioSimInterval);audioSimInterval=null;
+    if(btn)btn.textContent='▶';
+  }
+}
+
+function seekAudio(v){
+  audioSimPct=parseFloat(v);
+  const cur=document.getElementById('a-cur');
+  if(cur){const s=Math.round(audioSimPct/100*1800);cur.textContent=fmt(s);}
+}
+
+function setVol(v){}
+
+/* ─────────────────── SUBMIT ─────────────────── */
+function submitTest(){
+  if(submitted)return;
+  submitted=true;
+  clearInterval(timerInterval);
+  if(audioSimInterval){clearInterval(audioSimInterval);audioSimInterval=null;}
+
+  const t=TESTS[currentTestId];
+  const allQs=[];
+  t.questions.forEach(sec=>sec.qs.forEach(q=>allQs.push(q)));
+
+  let correct=0;
+  const items=[];
+
+  allQs.forEach(q=>{
+    const ua=(userAnswers[q.n]||'').trim().toLowerCase();
+    const ca=(q.ans||'').trim().toLowerCase();
+    let isOk=false;
+    if(q.type==='short'){
+      // allow partial match for short answers
+      const caParts=ca.split(/\s+/);
+      isOk=ua===ca || caParts.every(p=>ua.includes(p));
+    } else {
+      isOk=ua===ca;
+    }
+    if(isOk)correct++;
+
+    // mark inputs
+    if(q.type==='short'){
+      const inp=document.getElementById('qa-'+q.n);
+      if(inp){inp.classList.add(isOk?'correct':'wrong');inp.disabled=true;}
+    } else {
+      const opts=q.opts||q.options||[];
+      if(q.type==='tf'){
+        opts.forEach((o,i)=>{
+          const el=document.getElementById('tf-'+q.n+'-'+i);
+          if(!el)return;
+          el.classList.add('disabled');
+          if(o===q.ans)el.classList.add('correct');
+          else if(o.toLowerCase()===ua)el.classList.add('wrong');
+        });
+      } else {
+        opts.forEach((o,i)=>{
+          const el=document.getElementById('qo-'+q.n+'-'+i);
+          if(!el)return;
+          el.classList.add('disabled');
+          if(o===q.ans)el.classList.add('correct');
+          else if(o.toLowerCase()===ua)el.classList.add('wrong');
+        });
+      }
+    }
+
+    items.push({q,isOk,ua:userAnswers[q.n]||''});
+  });
+
+  const rawScore=Math.round(correct/allQs.length*40);
+  const band=getBand(rawScore);
+  const bc=bandClass(band);
+
+  // results html
+  let breakHtml='';
+  items.forEach(({q,isOk,ua})=>{
+    breakHtml+=`<div class="rb-item ${isOk?'ok':'err'}">
+      <div class="rb-item-head"><span class="rb-status">${isOk?'✅':'❌'}</span>
+      <span class="rb-qtext">Q${q.n}: ${q.text}</span></div>
+      <div class="rb-ans-row">
+        Your answer: <span class="${isOk?'rb-correct-ans':'rb-wrong-ans'}">${ua||'(no answer)'}</span>
+        ${!isOk?` &nbsp;→&nbsp; Correct: <span class="rb-correct-ans">${q.ans}</span>`:''}
+      </div>
+      ${!isOk?`<div class="rb-explain">💡 ${q.exp}</div><div class="rb-location">📍 ${q.loc}</div>`:''}
+    </div>`;
+  });
+
+  const isL=t.type==='listening';
+  let extraHtml='';
+  if(isL && t.transcript){
+    extraHtml=`<div class="transcript-box">${t.transcript}</div>`;
+  }
+
+  const resHtml=`
+    <div class="results-head">
+      <div class="score-ring"><div class="score-band-big">${band.toFixed(1)}</div><div class="score-band-lbl">Band Score</div></div>
+      <div class="results-raw">${rawScore} / 40 correct answers</div>
+      <div class="results-sub">You answered ${correct} of ${allQs.length} demo questions correctly · Estimated IELTS band: <strong>${band}</strong></div>
+    </div>
+    <div class="results-body">
+      ${isL?extraHtml:''}
+      <div class="rb-heading">📋 Full Answer Review</div>
+      ${breakHtml}
+      ${!isL?extraHtml:''}
+    </div>
+    <div class="results-foot">
+      <button class="close-results-btn" onclick="document.getElementById('results-overlay').style.display='none'">Close & Review</button>
+      <button class="retry-btn" onclick="document.getElementById('results-overlay').style.display='none';openTest('${isL?'l':'r'}','${currentTestId}')">↺ Retry Test</button>
+    </div>`;
+
+  document.getElementById('results-box').innerHTML=resHtml;
+  document.getElementById('results-overlay').style.display='flex';
+}
+
+/* ─────────────────── SCORE TABLE ─────────────────── */
+function renderScoreTable(){
+  const rows=[
+    [40,'9.0','C2','Expert'],
+    [39,'9.0','C2','Expert'],
+    [38,'8.5','C2','Very Good'],
+    [37,'8.5','C2','Very Good'],
+    [36,'8.0','C1','Very Good'],
+    [35,'8.0','C1','Very Good'],
+    [34,'7.5','C1','Good'],
+    [33,'7.5','C1','Good'],
+    [32,'7.0','B2+','Good'],
+    [31,'7.0','B2+','Good'],
+    [30,'6.5','B2','Competent'],
+    [29,'6.5','B2','Competent'],
+    [28,'6.0','B2','Competent'],
+    [27,'6.0','B2','Competent'],
+    [25,'5.5','B1+','Modest'],
+    [23,'5.0','B1','Modest'],
+    [19,'4.5','B1','Limited'],
+    [15,'4.0','A2+','Limited'],
+    [13,'3.5','A2','Extremely limited'],
+    [10,'3.0','A2','Extremely limited'],
+  ];
+  document.getElementById('score-tbody').innerHTML=rows.map(([c,b,cefr,desc])=>`
+    <tr>
+      <td style="font-weight:600">${c} / 40</td>
+      <td><span class="band-chip ${bandClass(parseFloat(b))}">${b}</span></td>
+      <td>${cefr}</td>
+      <td>${desc}</td>
+    </tr>`).join('');
+}
+
+/* ─────────────────── ADMIN ─────────────────── */
+const ADMIN_PASS='CDI2025admin';
+function adminLogin(){
+  const pw=document.getElementById('admin-pw').value;
+  if(pw===ADMIN_PASS){
+    document.getElementById('admin-login-box').style.display='none';
+    document.getElementById('admin-panel-inner').style.display='block';
+  } else {
+    document.getElementById('admin-err').style.display='block';
+  }
+}
+function adminLogout(){
+  document.getElementById('admin-pw').value='';
+  document.getElementById('admin-login-box').style.display='block';
+  document.getElementById('admin-panel-inner').style.display='none';
+  go('home');
+}
+
+function setupAdminDrop(type){
+  const inp=document.getElementById('fi-'+type);
+  const dz=document.getElementById('dz-'+type);
+  const list=document.getElementById('afl-'+type);
+  const pb=document.getElementById('pb-'+type);
+  let files=[];
+  inp.addEventListener('change',function(){files=Array.from(this.files);renderFiles();});
+  dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('over');});
+  dz.addEventListener('dragleave',()=>dz.classList.remove('over'));
+  dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('over');files=Array.from(e.dataTransfer.files);renderFiles();});
+  function renderFiles(){
+    list.innerHTML='';
+    if(!files.length){pb.style.display='none';return;}
+    files.forEach((f)=>{
+      const d=document.createElement('div');d.className='admin-file-item';
+      const ext=f.name.split('.').pop().toLowerCase();
+      const icon=['mp3','wav','m4a'].includes(ext)?'🎵':'📄';
+      d.innerHTML=`<span class="afi-icon">${icon}</span><div class="afi-info"><div class="afi-name">${f.name}</div><div class="afi-size">${(f.size/1024/1024).toFixed(2)} MB</div></div><button class="afi-del" onclick="this.parentElement.remove()">×</button>`;
+      list.appendChild(d);
+    });
+    pb.style.display='inline-block';
+  }
+}
+
+function adminPublish(type){
+  const prog=document.getElementById('ap-'+type);
+  const fill=document.getElementById('apf-'+type);
+  const btn=document.getElementById('pb-'+type);
+  const ok=document.getElementById('pok-'+type);
+  prog.style.display='block';fill.style.width='0';btn.disabled=true;btn.textContent='Publishing…';
+  let w=0;
+  const iv=setInterval(()=>{
+    w+=Math.random()*18+8;
+    if(w>=100){w=100;clearInterval(iv);
+      setTimeout(()=>{prog.style.display='none';btn.style.display='none';ok.style.display='block';
+        document.getElementById('afl-'+type).innerHTML='';
+        document.getElementById('fi-'+type).value='';
+      },400);
+    }
+    fill.style.width=Math.min(w,100)+'%';
+  },120);
+}
+
+/* ─────────────────── UTILS ─────────────────── */
+function fmt(s){const m=Math.floor(s/60);const sec=s%60;return m+':'+(sec<10?'0':'')+sec;}
+function stopAll(){
+  clearInterval(timerInterval);
+  if(audioSimInterval){clearInterval(audioSimInterval);audioSimInterval=null;}
+}
+
+/* ─────────────────── INIT ─────────────────── */
+setupAdminDrop('read');
+setupAdminDrop('listen');
+renderScoreTable();
+
+// Check URL for admin
+if(window.location.search.includes('admin=1')){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('admin-page').classList.add('active');
+}
+
+// Filter buttons (cosmetic)
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    this.closest('.filter-row').querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
